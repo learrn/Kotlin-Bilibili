@@ -13,7 +13,7 @@ import kotlin.properties.Delegates
 class BilibiliApp : Application(), ThemeUtils.switchColor {
 
     companion object {
-        var instance: BilibiliApp by Delegates.notNull()
+        var instance: BilibiliApp = BilibiliApp()
     }
 
     override fun onCreate() {

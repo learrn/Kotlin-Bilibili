@@ -1,5 +1,6 @@
 package com.xiangjuncheng.kotlinbilibili.module.common
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
@@ -78,7 +79,7 @@ class LoginActivity : RxBaseActivity() {
         }
 
         PreferenceUtil(name = ConstantUtil.KEY, default = true)
-        //startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
         finish()
     }
 
