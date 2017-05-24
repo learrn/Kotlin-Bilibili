@@ -1,14 +1,15 @@
 package com.xiangjuncheng.kotlinbilibili.module.common
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
-import com.xiangjuncheng.kotlinbilibili.MainActivity
 import com.xiangjuncheng.kotlinbilibili.R
 import com.xiangjuncheng.kotlinbilibili.base.RxBaseActivity
+import com.xiangjuncheng.kotlinbilibili.utils.CommonUtil
+import com.xiangjuncheng.kotlinbilibili.utils.ConstantUtil
+import com.xiangjuncheng.kotlinbilibili.utils.PreferenceUtil
 import kotlinx.android.synthetic.main.activity_login.*
 
 
@@ -17,7 +18,7 @@ class LoginActivity : RxBaseActivity() {
         return R.layout.activity_login
     }
 
-    override fun initViews(savedInstanceState: Bundle) {
+    override fun initViews(savedInstanceState: Bundle?) {
         et_username.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus && et_username.text.isNotEmpty()) {
                 delete_username.visibility = View.VISIBLE
@@ -29,12 +30,12 @@ class LoginActivity : RxBaseActivity() {
             iv_icon_right.setImageResource(R.drawable.ic_33)
         }
 
-        et_password.setOnFocusChangeListener{ v, hasFocus ->
+        et_password.setOnFocusChangeListener { v, hasFocus ->
             iv_icon_left.setImageResource(R.drawable.ic_22_hide)
             iv_icon_right.setImageResource(R.drawable.ic_33_hide)
         }
 
-        et_username.addTextChangedListener(object :TextWatcher{
+        et_username.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
 
@@ -47,12 +48,18 @@ class LoginActivity : RxBaseActivity() {
             }
 
         })
-        btn_login.setOnClickListener { et_username.setText("")
+        delete_username.setOnClickListener {
+            et_username.setText("")
             et_password.setText("")
             delete_username.visibility = View.GONE
             et_username.isFocusable = true
             et_username.isFocusableInTouchMode = true
-            et_username.requestFocus() }
+            et_username.requestFocus()
+        }
+
+        btn_login.setOnClickListener {
+            if (!CommonUtil.isNetworkAvailable(this)) toast("当前网络不可用,请检查网络设置") else login()
+        }
     }
 
     private fun login() {
@@ -61,16 +68,17 @@ class LoginActivity : RxBaseActivity() {
         val password = et_password.text.toString()
 
         if (TextUtils.isEmpty(name)) {
+            toast("账号不能为空")
             return
         }
 
         if (TextUtils.isEmpty(password)) {
-//            ToastUtil.ShortToast("密码不能为空")
+            toast("密码不能为空")
             return
         }
 
-//        PreferenceUtil.putBoolean(ConstantUtil.KEY, true)
-        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+        PreferenceUtil(name = ConstantUtil.KEY, default = true)
+        //startActivity(Intent(this@LoginActivity, MainActivity::class.java))
         finish()
     }
 
@@ -78,10 +86,5 @@ class LoginActivity : RxBaseActivity() {
         toolbar.setNavigationIcon(R.drawable.ic_cancle)
         toolbar.title = "登录"
         toolbar.setNavigationOnClickListener({ v -> finish() })
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
     }
 }

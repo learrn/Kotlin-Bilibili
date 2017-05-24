@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.ImageView
 import com.xiangjuncheng.kotlinbilibili.R
 import com.xiangjuncheng.kotlinbilibili.utils.ThemeHelper
+import kotlinx.android.synthetic.main.dialog_theme_picker.*
 
 
 /**
@@ -33,15 +34,15 @@ class CardPickerDialog : DialogFragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mCancel = view.findViewById(android.R.id.button2) as Button
-        mCards[0] = view.findViewById(R.id.theme_pink) as ImageView
-        mCards[1] = view.findViewById(R.id.theme_purple) as ImageView
-        mCards[2] = view.findViewById(R.id.theme_blue) as ImageView
-        mCards[3] = view.findViewById(R.id.theme_green) as ImageView
-        mCards[4] = view.findViewById(R.id.theme_green_light) as ImageView
-        mCards[5] = view.findViewById(R.id.theme_yellow) as ImageView
-        mCards[6] = view.findViewById(R.id.theme_orange) as ImageView
-        mCards[7] = view.findViewById(R.id.theme_red) as ImageView
+        mCancel = button2
+        mCards[0] = theme_pink
+        mCards[1] = theme_purple
+        mCards[2] = theme_blue
+        mCards[3] = theme_green
+        mCards[4] = theme_green_light
+        mCards[5] = theme_yellow
+        mCards[6] = theme_orange
+        mCards[7] = theme_red
         setImageButtons(mCurrentTheme)
         for (card in mCards) {
             card?.setOnClickListener(this)
@@ -92,6 +93,10 @@ class CardPickerDialog : DialogFragment(), View.OnClickListener {
             else -> {
             }
         }
+    }
+
+    fun setClickListener(clickListener: ClickListener) {
+        mClickListener = clickListener
     }
 
     private fun setImageButtons(currentTheme: Int) {

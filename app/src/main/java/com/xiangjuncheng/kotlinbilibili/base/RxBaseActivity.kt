@@ -10,7 +10,9 @@ import com.xiangjuncheng.kotlinbilibili.R
 import com.xiangjuncheng.kotlinbilibili.utils.ThemeHelper
 import com.xiangjuncheng.kotlinbilibili.widget.dialog.CardPickerDialog
 import android.app.Activity
+import android.content.Context
 import android.view.View
+import android.widget.Toast
 
 
 abstract class RxBaseActivity : RxAppCompatActivity(), CardPickerDialog.ClickListener {
@@ -18,12 +20,12 @@ abstract class RxBaseActivity : RxAppCompatActivity(), CardPickerDialog.ClickLis
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutId())
-        initViews(savedInstanceState!!)
+        initViews(savedInstanceState)
         initToolBar()
     }
 
     abstract fun getLayoutId(): Int
-    abstract fun initViews(savedInstanceState: Bundle)
+    abstract fun initViews(savedInstanceState: Bundle?)
     abstract fun initToolBar()
 
     fun loadData() {}
@@ -67,5 +69,9 @@ abstract class RxBaseActivity : RxAppCompatActivity(), CardPickerDialog.ClickLis
             val description = ActivityManager.TaskDescription(null, null, ThemeUtils.getThemeAttrColor(this, android.R.attr.colorPrimary))
             setTaskDescription(description)
         }
+    }
+
+    fun Context.toast(message: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
+        Toast.makeText(this, message, duration).show()
     }
 }
