@@ -1,6 +1,6 @@
 package com.xiangjuncheng.kotlinbilibili.utils
 
-import android.content.Context
+import android.preference.PreferenceManager
 import com.xiangjuncheng.kotlinbilibili.BilibiliApp
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
@@ -11,11 +11,28 @@ import kotlin.reflect.KProperty
  */
 
 
-class PreferenceUtil<T>(val context: Context = BilibiliApp.instance, val name: String, val default: T)
+class PreferenceUtil<T>(val name: String, val default: T)
     : ReadWriteProperty<Any?, T> {
-    val prefs by lazy {
-        context.getSharedPreferences("default", Context.MODE_PRIVATE)
+    companion object {
+        val prefs by lazy {
+            PreferenceManager.getDefaultSharedPreferences(BilibiliApp.mInstance)
+        }
+
+        /**
+         * 删除全部数据
+         */
+        fun clearPreference() {
+            prefs.edit().clear().commit()
+        }
+
+        /**
+         * 根据key删除存储数据
+         */
+        fun clearPreference(key: String) {
+            prefs.edit().remove(key).commit()
+        }
     }
+
 
     override fun getValue(thisRef: Any?, property: KProperty<*>): T {
         return findPreference(name, default)
@@ -24,6 +41,7 @@ class PreferenceUtil<T>(val context: Context = BilibiliApp.instance, val name: S
     override fun setValue(thisRef: Any?, property: KProperty<*>, value: T) {
         putPreference(name, value)
     }
+
 
     private fun <T> findPreference(name: String, default: T): T = with(prefs) {
         val res: Any = when (default) {
@@ -50,19 +68,6 @@ class PreferenceUtil<T>(val context: Context = BilibiliApp.instance, val name: S
         }.apply()
     }
 
-    /**
-     * 删除全部数据
-     */
-    fun clearPreference() {
-        prefs.edit().clear().commit()
-    }
-
-    /**
-     * 根据key删除存储数据
-     */
-    fun clearPreference(key: String) {
-        prefs.edit().remove(key).commit()
-    }
 
 }
 

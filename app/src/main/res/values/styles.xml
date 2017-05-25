@@ -25,18 +25,18 @@
 
 
     <!--离线缓存进度条Style-->
-    <!--<style name="NumberProgressBar_Beauty_Red">-->
-    <!--<item name="android:layout_height">wrap_content</item>-->
-    <!--<item name="android:layout_width">match_parent</item>-->
-    <!--<item name="progress_max">100</item>-->
-    <!--<item name="progress_current">0</item>-->
-    <!--<item name="progress_unreached_color">@color/gray_light</item>-->
-    <!--<item name="progress_reached_color">@color/colorPrimary</item>-->
-    <!--<item name="progress_text_size">10sp</item>-->
-    <!--<item name="progress_text_color">#FF3D7F</item>-->
-    <!--<item name="progress_reached_bar_height">20dp</item>-->
-    <!--<item name="progress_unreached_bar_height">20dp</item>-->
-    <!--</style>-->
+    <style name="NumberProgressBar_Beauty_Red">
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="progress_max">100</item>
+    <item name="progress_current">0</item>
+    <item name="progress_unreached_color">@color/gray_light</item>
+    <item name="progress_reached_color">@color/colorPrimary</item>
+    <item name="progress_text_size">10sp</item>
+    <item name="progress_text_color">#FF3D7F</item>
+    <item name="progress_reached_bar_height">20dp</item>
+    <item name="progress_unreached_bar_height">20dp</item>
+    </style>
 
     <style name="CollapsingToolbarTitleStyle.About" parent="@android:style/TextAppearance">
         <item name="android:textColor">@android:color/transparent</item>

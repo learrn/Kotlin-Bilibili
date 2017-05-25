@@ -270,4 +270,7 @@
     <dimen name="nav_header_height">160dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
+    <!--nav header text size-->
+    <dimen name="nav_header_text_size">10sp</dimen>
+
 </resources>

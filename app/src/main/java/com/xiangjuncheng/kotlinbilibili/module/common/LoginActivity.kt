@@ -78,7 +78,8 @@ class LoginActivity : RxBaseActivity() {
             return
         }
 
-        PreferenceUtil(name = ConstantUtil.KEY, default = true)
+        var isLogin :Boolean by PreferenceUtil(name = ConstantUtil.KEY, default = false)
+        isLogin = true
         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
         finish()
     }

@@ -7,17 +7,19 @@ import android.support.annotation.ColorRes
 import com.bilibili.magicasakura.utils.ThemeUtils
 import com.squareup.leakcanary.LeakCanary
 import com.xiangjuncheng.kotlinbilibili.utils.ThemeHelper
-import kotlin.properties.Delegates
 
 
 class BilibiliApp : Application(), ThemeUtils.switchColor {
-
     companion object {
-        var instance: BilibiliApp = BilibiliApp()
+        var mInstance: BilibiliApp ?= null
+//        fun getInstance(): BilibiliApp? {
+//            return mInstance
+//        }
     }
 
     override fun onCreate() {
         super.onCreate()
+        mInstance = this
         init()
     }
 
