@@ -61,13 +61,6 @@
             android:title="@string/item_theme" />
 
         <item
-            android:id="@+id/item_app"
-            android:checkable="false"
-            android:icon="@drawable/ic_shop_black_24dp"
-            android:title="@string/item_app" />
-
-
-        <item
             android:id="@+id/item_settings"
             android:icon="@drawable/ic_settings_black_24dp"
             android:title="@string/item_settings" />

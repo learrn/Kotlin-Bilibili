@@ -11,21 +11,18 @@ import com.xiangjuncheng.kotlinbilibili.utils.ThemeHelper
 
 class BilibiliApp : Application(), ThemeUtils.switchColor {
     companion object {
-        var mInstance: BilibiliApp ?= null
-//        fun getInstance(): BilibiliApp? {
-//            return mInstance
-//        }
+        lateinit var instance: BilibiliApp
     }
 
     override fun onCreate() {
         super.onCreate()
-        mInstance = this
         init()
     }
 
     private fun init() {
         // 初始化主题切换
         ThemeUtils.setSwitchColor(this)
+        instance = this
         //初始化Leak内存泄露检测工具
         LeakCanary.install(this)
         //初始化Stetho调试工具

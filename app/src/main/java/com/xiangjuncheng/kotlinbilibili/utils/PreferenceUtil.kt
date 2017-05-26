@@ -15,7 +15,7 @@ class PreferenceUtil<T>(val name: String, val default: T)
     : ReadWriteProperty<Any?, T> {
     companion object {
         val prefs by lazy {
-            PreferenceManager.getDefaultSharedPreferences(BilibiliApp.mInstance)
+            PreferenceManager.getDefaultSharedPreferences(BilibiliApp.instance)
         }
 
         /**

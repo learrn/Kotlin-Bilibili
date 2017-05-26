@@ -40,7 +40,8 @@
         <activity
             android:name=".module.common.LoginActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".base.RxLazyFragment"></activity>
+        <activity android:name=".module.search.TotalStationSearchActivity" />
+        <activity android:name=".module.entry.OffLineDownloadActivity" />
     </application>
 
 </manifest>

@@ -11,6 +11,8 @@ import android.view.MenuItem
 import android.view.View
 import com.xiangjuncheng.kotlinbilibili.R
 import com.xiangjuncheng.kotlinbilibili.base.RxBaseActivity
+import com.xiangjuncheng.kotlinbilibili.module.entry.OffLineDownloadActivity
+import com.xiangjuncheng.kotlinbilibili.module.home.HomePageFragment
 import com.xiangjuncheng.kotlinbilibili.utils.ConstantUtil
 import com.xiangjuncheng.kotlinbilibili.utils.PreferenceUtil
 import com.xiangjuncheng.kotlinbilibili.widget.CircleImageView
@@ -21,9 +23,9 @@ import kotlinx.android.synthetic.main.nav_header_main.view.*
 class MainActivity : RxBaseActivity(), NavigationView.OnNavigationItemSelectedListener {
     private val fragments: Array<Fragment>? = null
 
-    private val currentTabIndex: Int = 0
+    private var currentTabIndex: Int = 0
 
-    private val index: Int = 0
+    private var index: Int = 0
 
     private var exitTime: Long = 0
 
@@ -72,7 +74,7 @@ class MainActivity : RxBaseActivity(), NavigationView.OnNavigationItemSelectedLi
         // 离线缓存
             R.id.item_download -> startActivity(Intent(this@MainActivity, OffLineDownloadActivity::class.java))
         // 大会员
-            R.id.item_vip -> startActivity(Intent(this@MainActivity, VipActivity::class.java))
+            R.id.item_vip ,//-> startActivity(Intent(this@MainActivity, VipActivity::class.java))
         // 我的收藏
             R.id.item_favourite -> changeFragmentIndex(item, 1)
         // 历史记录
@@ -87,8 +89,6 @@ class MainActivity : RxBaseActivity(), NavigationView.OnNavigationItemSelectedLi
                 // dialog.setClickListener(this);
                 // dialog.show(getSupportFragmentManager(), CardPickerDialog.TAG);
             }
-        // 应用推荐
-            R.id.item_app -> return true
         // 设置中心
             R.id.item_settings -> changeFragmentIndex(item, 5)
             else -> return false
@@ -108,6 +108,26 @@ class MainActivity : RxBaseActivity(), NavigationView.OnNavigationItemSelectedLi
         }
         trx.show(fragments[index]).commit()
         currentTabIndex = index
+    }
+
+    /**
+     * 切换fragment下标
+     */
+    private fun changeFragmentIndex(item: MenuItem, currentIndex: Int) {
+        index = currentIndex
+        switchFragment()
+        item.isChecked = true
+    }
+
+    /**
+     * DrawerLayout侧滑菜单开关
+     */
+    fun toggleDrawer() {
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout.closeDrawer(GravityCompat.START)
+        } else {
+            drawer_layout.openDrawer(GravityCompat.START)
+        }
     }
 
     /**
