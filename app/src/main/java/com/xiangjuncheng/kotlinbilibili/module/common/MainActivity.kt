@@ -17,6 +17,7 @@ import com.xiangjuncheng.kotlinbilibili.utils.ConstantUtil
 import com.xiangjuncheng.kotlinbilibili.utils.PreferenceUtil
 import com.xiangjuncheng.kotlinbilibili.widget.CircleImageView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.nav_header_main.*
 import kotlinx.android.synthetic.main.nav_header_main.view.*
 
 
@@ -47,9 +48,7 @@ class MainActivity : RxBaseActivity(), NavigationView.OnNavigationItemSelectedLi
     private fun initNavigationView() {
         navigationView.setNavigationItemSelectedListener(this)
         val headerView: View = navigationView.getHeaderView(0)
-        headerView.findViewById(R.id.user_avatar_view)
-        val mUserAvatarView = headerView.findViewById(R.id.user_avatar_view) as CircleImageView
-        mUserAvatarView.setImageResource(R.drawable.ic_hotbitmapgg_avatar)
+        (user_avatar_view as CircleImageView).setImageResource(R.drawable.ic_hotbitmapgg_avatar)
         headerView.user_name.text = resources.getText(R.string.hotbitmapgg)
         headerView.user_other_info.text = resources.getText(R.string.about_user_head_layout)
         headerView.iv_head_switch_mode.setOnClickListener { switchNightMode() }
@@ -139,12 +138,8 @@ class MainActivity : RxBaseActivity(), NavigationView.OnNavigationItemSelectedLi
             if (drawer_layout.isDrawerOpen(drawer_layout.getChildAt(1))) {
                 drawer_layout.closeDrawers()
             } else {
-                if (mHomePageFragment != null) {
-                    if (mHomePageFragment.isOpenSearchView()) {
+                if (mHomePageFragment != null && mHomePageFragment.isOpenSearchView()) {
                         mHomePageFragment.closeSearchView()
-                    } else {
-                        exitApp()
-                    }
                 } else {
                     exitApp()
                 }

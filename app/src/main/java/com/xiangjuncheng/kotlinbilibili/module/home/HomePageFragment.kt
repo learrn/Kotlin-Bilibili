@@ -61,8 +61,9 @@ class HomePageFragment : RxLazyFragment() {
         sliding_tabs.setViewPager(view_pager)
         view_pager.currentItem = 1
         navigation_layout.setOnClickListener {
-            if (activity is MainActivity)
+            if (activity is MainActivity){
                 (activity as MainActivity).toggleDrawer()
+            }
         }
     }
 

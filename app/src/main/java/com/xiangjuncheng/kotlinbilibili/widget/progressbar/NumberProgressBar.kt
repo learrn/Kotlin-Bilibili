@@ -3,9 +3,9 @@ package com.xiangjuncheng.kotlinbilibili.widget.progressbar
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Paint
-import android.view.View
 import android.graphics.RectF
 import android.util.AttributeSet
+import android.view.View
 import com.xiangjuncheng.kotlinbilibili.R
 
 
@@ -57,32 +57,32 @@ class NumberProgressBar : View {
     /**
      * The progress area bar color.
      */
-    private val mReachedBarColor: Int = 0
+    private var mReachedBarColor: Int = 0
 
     /**
      * The bar unreached area color.
      */
-    private val mUnreachedBarColor: Int = 0
+    private var mUnreachedBarColor: Int = 0
 
     /**
      * The progress text color.
      */
-    private val mTextColor: Int = 0
+    private var mTextColor: Int = 0
 
     /**
      * The progress text size.
      */
-    private val mTextSize: Float = 0.toFloat()
+    private var mTextSize: Float = 0.toFloat()
 
     /**
      * The height of the reached area.
      */
-    private val mReachedBarHeight: Float = 0.toFloat()
+    private var mReachedBarHeight: Float = 0.toFloat()
 
     /**
      * The height of the unreached area.
      */
-    private val mUnreachedBarHeight: Float = 0.toFloat()
+    private var mUnreachedBarHeight: Float = 0.toFloat()
 
     /**
      * The suffix of the number.
@@ -100,13 +100,13 @@ class NumberProgressBar : View {
 
     private val default_unreached_color = Color.rgb(204, 204, 204)
 
-    private val default_progress_text_offset: Float = 0.toFloat()
+    private var default_progress_text_offset: Float = 0.toFloat()
 
-    private val default_text_size: Float = 0.toFloat()
+    private var default_text_size: Float = 0.toFloat()
 
-    private val default_reached_bar_height: Float = 0.toFloat()
+    private var default_reached_bar_height: Float = 0.toFloat()
 
-    private val default_unreached_bar_height: Float = 0.toFloat()
+    private var default_unreached_bar_height: Float = 0.toFloat()
     /**
      * The width of the text that to be drawn.
      */
@@ -155,7 +155,7 @@ class NumberProgressBar : View {
     /**
      * The progress text offset.
      */
-    private val mOffset: Float = 0.toFloat()
+    private var mOffset: Float = 0.toFloat()
 
     /**
      * Determine if need to draw unreached area.
@@ -164,7 +164,7 @@ class NumberProgressBar : View {
 
     private val mDrawReachedBar = true
 
-    private val mIfDrawText = true
+    private var mIfDrawText = true
 
     /**
      * Listener
@@ -176,6 +176,49 @@ class NumberProgressBar : View {
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, R.attr.numberProgressBarStyle)
 
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr){
+        default_reached_bar_height = dp2px(1.5f)
+        default_unreached_bar_height = dp2px(1.0f)
+        default_text_size = sp2px(10f)
+        default_progress_text_offset = dp2px(3.0f)
 
+        val attributes = context.theme.obtainStyledAttributes(attrs,R.styleable.NumberProgressBar,defStyleAttr,0)
+        mReachedBarColor = attributes.getColor(R.styleable.NumberProgressBar_progress_reached_color,default_reached_color)
+        mUnreachedBarColor = attributes.getColor(R.styleable.NumberProgressBar_progress_unreached_color,default_unreached_color)
+        mTextColor = attributes.getColor(R.styleable.NumberProgressBar_progress_text_color,default_text_color)
+        mTextSize = attributes.getDimension(R.styleable.NumberProgressBar_progress_text_size,default_text_size)
+        mReachedBarHeight = attributes.getDimension(R.styleable.NumberProgressBar_progress_reached_bar_height,default_reached_bar_height)
+        mUnreachedBarHeight = attributes.getDimension(R.styleable.NumberProgressBar_progress_unreached_bar_height,default_unreached_bar_height)
+        mOffset = attributes.getDimension(R.styleable.NumberProgressBar_progress_text_offset,default_progress_text_offset)
+
+        if (PROGRESS_TEXT_VISIBLE != attributes.getInt(R.styleable.NumberProgressBar_progress_text_visibility, PROGRESS_TEXT_VISIBLE)){
+            mIfDrawText = false
+        }
+        setProgress(attributes.getInt(R.styleable.NumberProgressBar_progress_current,0))
+        setMax(attributes.getInt(R.styleable.NumberProgressBar_progress_max,100))
+
+        attributes.recycle()
+        initializePainters()
+    }
+
+    override fun getSuggestedMinimumHeight(): Int {
+        return mTextSize.toInt()
+    }
+
+    override fun getSuggestedMinimumWidth(): Int {
+        return Math.max(mTextSize.toInt(),Math.max(mReachedBarHeight.toInt(),mUnreachedBarHeight.toInt()))
+    }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        setMeasuredDimension(measure(widthMeasureSpec,true),measure(heightMeasureSpec,false))
+    }
+
+    fun dp2px(dp: Float): Float {
+        val scale = resources.displayMetrics.density
+        return dp * scale + 0.5f
+    }
+
+    fun sp2px(sp: Float): Float {
+        val scale = resources.displayMetrics.scaledDensity
+        return sp * scale
     }
 }
