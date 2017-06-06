@@ -13,7 +13,7 @@ class OffLineDownloadActivity : RxBaseActivity() {
     override fun initViews(savedInstanceState: Bundle?) {
         val phoneTotalSize = CommonUtil.getPhoneTotalSize()
         val phoneAvailableSize = CommonUtil.getPhoneAvailableSize()
-        (progress_bar as NumberProgressBar).setpro
+        (progress_bar as NumberProgressBar).setProgress()
     }
 
     override fun initToolBar() {
