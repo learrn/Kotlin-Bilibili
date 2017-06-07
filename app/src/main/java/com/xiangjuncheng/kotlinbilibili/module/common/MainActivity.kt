@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.nav_header_main.view.*
 
 
 class MainActivity : RxBaseActivity(), NavigationView.OnNavigationItemSelectedListener {
-    private val fragments: Array<Fragment>? = null
+    private var fragments: Array<Fragment>? = null
 
     private var currentTabIndex: Int = 0
 
@@ -30,7 +30,7 @@ class MainActivity : RxBaseActivity(), NavigationView.OnNavigationItemSelectedLi
 
     private var exitTime: Long = 0
 
-    private val mHomePageFragment: HomePageFragment? = null
+    private var mHomePageFragment: HomePageFragment? = null
 
     override fun getLayoutId(): Int = R.layout.activity_main
 
@@ -42,7 +42,18 @@ class MainActivity : RxBaseActivity(), NavigationView.OnNavigationItemSelectedLi
     override fun initToolBar() {}
 
     private fun initFragements() {
+        mHomePageFragment = HomePageFragment
+//        val mFavoritesFragment = IFavoritesFragment.newInstance()
+//        val mHistoryFragment = HistoryFragment.newInstance()
+//        val mAttentionPeopleFragment = AttentionPeopleFragment.newInstance()
+//        val mConsumeHistoryFragment = ConsumeHistoryFragment.newInstance()
+//        val mSettingFragment = SettingFragment.newInstance()
 
+        fragments = arrayOf<Fragment>(mHomePageFragment!!)
+
+        supportFragmentManager.beginTransaction()
+                .add(R.id.container, mHomePageFragment)
+                .show(mHomePageFragment).commit()
     }
 
     private fun initNavigationView() {
@@ -102,10 +113,10 @@ class MainActivity : RxBaseActivity(), NavigationView.OnNavigationItemSelectedLi
     private fun switchFragment() {
         val trx = supportFragmentManager.beginTransaction()
         trx.hide(fragments?.get(currentTabIndex))
-        if (!fragments!![index].isAdded()) {
-            trx.add(R.id.container, fragments[index])
+        if (!fragments!![index].isAdded) {
+            trx.add(R.id.container, fragments!![index])
         }
-        trx.show(fragments[index]).commit()
+        trx.show(fragments!![index]).commit()
         currentTabIndex = index
     }
 
@@ -138,8 +149,8 @@ class MainActivity : RxBaseActivity(), NavigationView.OnNavigationItemSelectedLi
             if (drawer_layout.isDrawerOpen(drawer_layout.getChildAt(1))) {
                 drawer_layout.closeDrawers()
             } else {
-                if (mHomePageFragment != null && mHomePageFragment.isOpenSearchView()) {
-                        mHomePageFragment.closeSearchView()
+                if (mHomePageFragment != null && mHomePageFragment!!.isOpenSearchView()) {
+                        mHomePageFragment!!.closeSearchView()
                 } else {
                     exitApp()
                 }

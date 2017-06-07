@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_home_pager.*
  * Created by xiangjuncheng on 2017/5/25.
  * 主页面fragment
  */
-class HomePageFragment : RxLazyFragment() {
+object HomePageFragment : RxLazyFragment() {
     override fun getLayoutResId(): Int = R.layout.fragment_home_pager
 
     override fun finishCreateView(state: Bundle?) {
