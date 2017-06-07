@@ -170,7 +170,11 @@ class NumberProgressBar : View {
 
     private var mIfDrawText = true
 
-    private val mListener: OnProgressBarListener? = null
+    private var mListener: OnProgressBarListener? = null
+
+    enum class ProgressTextVisibility {
+        Visible, Invisible
+    }
 
     /**
      * Listener
@@ -293,7 +297,7 @@ class NumberProgressBar : View {
             mDrawTextStart = mReachedRectF.right + mOffset
         }
 
-        mDrawTextEnd = (height / 2.0f - (mTextPaint?.descent() + mTextPaint?.ascent()) / 2.0f).toFloat()
+        mDrawTextEnd = height / 2.0f - (mTextPaint!!.descent()+ mTextPaint!!.ascent()) / 2.0f
 
         if (mDrawTextStart + mDrawTextWidth >= width - paddingRight) {
             mDrawTextStart = width - paddingRight - mDrawTextWidth
@@ -462,9 +466,7 @@ class NumberProgressBar : View {
             setProgress(getProgress() + by)
         }
 
-        if (mListener != null) {
-            mListener.onProgressChange(getProgress(), getMax())
-        }
+        mListener?.onProgressChange(getProgress(), getMax())
     }
 
 

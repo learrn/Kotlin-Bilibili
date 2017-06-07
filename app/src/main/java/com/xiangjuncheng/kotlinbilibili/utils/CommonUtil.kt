@@ -19,7 +19,7 @@ class CommonUtil {
          */
         fun isNetworkAvailable(context: Context): Boolean {
             val info = getNetworkInfo(context)
-            return info!!.isAvailable
+            return info?.isAvailable ?:false
         }
 
         /**
