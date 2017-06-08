@@ -12,6 +12,7 @@ import android.view.View
 import com.xiangjuncheng.kotlinbilibili.R
 import com.xiangjuncheng.kotlinbilibili.base.RxBaseActivity
 import com.xiangjuncheng.kotlinbilibili.module.entry.OffLineDownloadActivity
+import com.xiangjuncheng.kotlinbilibili.module.entry.VipActivity
 import com.xiangjuncheng.kotlinbilibili.module.home.HomePageFragment
 import com.xiangjuncheng.kotlinbilibili.utils.ConstantUtil
 import com.xiangjuncheng.kotlinbilibili.utils.PreferenceUtil
@@ -63,6 +64,11 @@ class MainActivity : RxBaseActivity(), NavigationView.OnNavigationItemSelectedLi
         headerView.user_name.text = resources.getText(R.string.hotbitmapgg)
         headerView.user_other_info.text = resources.getText(R.string.about_user_head_layout)
         headerView.iv_head_switch_mode.setOnClickListener { switchNightMode() }
+        val flag : Boolean by PreferenceUtil(name = ConstantUtil.SWITCH_MODE_KEY, default = false)
+        if (flag)
+            iv_head_switch_mode.setImageResource(R.drawable.ic_switch_daily)
+        else
+            iv_head_switch_mode.setImageResource(R.drawable.ic_switch_night)
     }
 
     private fun switchNightMode() {
@@ -84,7 +90,7 @@ class MainActivity : RxBaseActivity(), NavigationView.OnNavigationItemSelectedLi
         // 离线缓存
             R.id.item_download -> startActivity(Intent(this@MainActivity, OffLineDownloadActivity::class.java))
         // 大会员
-            R.id.item_vip ,//-> startActivity(Intent(this@MainActivity, VipActivity::class.java))
+            R.id.item_vip -> startActivity(Intent(this@MainActivity, VipActivity::class.java))
         // 我的收藏
             R.id.item_favourite -> changeFragmentIndex(item, 1)
         // 历史记录

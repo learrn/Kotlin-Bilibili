@@ -42,6 +42,7 @@
             android:screenOrientation="portrait" />
         <activity android:name=".module.search.TotalStationSearchActivity" />
         <activity android:name=".module.entry.OffLineDownloadActivity" />
+        <activity android:name=".module.entry.VipActivity"></activity>
     </application>
 
 </manifest>
