@@ -2,28 +2,15 @@ package com.xiangjuncheng.kotlinbilibili.widget
 
 import android.content.Context
 import android.graphics.*
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.support.annotation.ColorRes
+import android.support.annotation.DrawableRes
 import android.util.AttributeSet
 import android.widget.ImageView
 import com.xiangjuncheng.kotlinbilibili.R
-import android.graphics.ColorFilter
-import android.support.annotation.DrawableRes
-import android.graphics.drawable.Drawable
-import android.graphics.Bitmap
-import android.net.Uri
-import android.opengl.ETC1.getHeight
-import android.opengl.ETC1.getWidth
-import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.BitmapDrawable
-import android.R.attr.inset
-import android.opengl.ETC1.getWidth
-import android.opengl.ETC1.getHeight
-import android.graphics.Shader.TileMode
-import android.graphics.BitmapShader
-
-
-
-
 
 
 /**
@@ -280,10 +267,10 @@ class CircleImageView : ImageView {
         mShaderMatrix.set(null)
 
         if (mBitmapWidth * mDrawableRect.height() > mDrawableRect.width() * mBitmapHeight) {
-            scale = mDrawableRect.height() / mBitmapHeight as Float
+            scale = (mDrawableRect.height() / mBitmapHeight) as Float
             dx = (mDrawableRect.width() - mBitmapWidth * scale) * 0.5f
         } else {
-            scale = mDrawableRect.width() / mBitmapWidth as Float
+            scale = (mDrawableRect.width() / mBitmapWidth) as Float
             dy = (mDrawableRect.height() - mBitmapHeight * scale) * 0.5f
         }
 

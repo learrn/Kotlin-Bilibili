@@ -21,7 +21,6 @@ import android.util.Log
 import com.xiangjuncheng.kotlinbilibili.R
 import java.lang.reflect.Array.setInt
 import java.lang.reflect.AccessibleObject.setAccessible
-import sun.plugin.viewer.LifeCycleManager.getIdentifier
 import java.util.regex.Pattern
 
 
@@ -346,9 +345,9 @@ class SystemBarHelper {
         fun getStatusBarHeight(context: Context): Int {
 
             var result = 0
-            val resId = context.getResources().getIdentifier("status_bar_height", "dimen", "android")
+            val resId = context.resources.getIdentifier("status_bar_height", "dimen", "android")
             if (resId > 0) {
-                result = context.getResources().getDimensionPixelSize(resId)
+                result = context.resources.getDimensionPixelSize(resId)
             }
             return result
         }

@@ -38,7 +38,7 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_drawer_home" />
 
-                    <com.hotbitmapgg.bilibili.widget.CircleImageView
+                    <com.xiangjuncheng.kotlinbilibili.widget.CircleImageView
                         android:id="@+id/toolbar_user_avatar"
                         android:layout_width="@dimen/circle_user_small_size"
                         android:layout_height="@dimen/circle_user_small_size"

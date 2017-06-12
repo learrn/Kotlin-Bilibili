@@ -6,6 +6,7 @@ import com.xiangjuncheng.kotlinbilibili.base.RxBaseActivity
 import android.graphics.drawable.AnimationDrawable
 import android.text.TextUtils
 import android.view.View
+import com.jakewharton.rxbinding.view.RxView
 import com.jakewharton.rxbinding.widget.RxTextView
 import com.xiangjuncheng.kotlinbilibili.utils.ConstantUtil
 import kotlinx.android.synthetic.main.activity_search.*
@@ -18,11 +19,6 @@ class TotalStationSearchActivity : RxBaseActivity() {
 
     private var mAnimationDrawable: AnimationDrawable? = null
 
-    private val titles = ArrayList()
-
-    private val fragments = ArrayList()
-
-    private val navs = ArrayList()
     override fun getLayoutId(): Int = R.layout.activity_search
 
     override fun initViews(savedInstanceState: Bundle?) {
@@ -31,16 +27,15 @@ class TotalStationSearchActivity : RxBaseActivity() {
         }
         iv_search_loading.setImageResource(R.drawable.anim_search_loading)
         mAnimationDrawable = iv_search_loading.drawable as AnimationDrawable?
-        showSearchAnim()
+//        showSearchAnim()
         search_edit.clearFocus()
         search_edit.setText(content)
-        getSearchData()
-        search()
+//        getSearchData()
+//        search()
         setUpEditText()
     }
 
     override fun initToolBar() {
-        Statusbar
     }
 
     private fun setUpEditText() {
@@ -50,18 +45,13 @@ class TotalStationSearchActivity : RxBaseActivity() {
 //                .observeOn(AndroidSchedulers.mainThread())
 //
 //        }
-    RxTextView.textChanges(search_edit)
-    .compose(this.bindToLifecycle())
-    .map(CharSequence::toString)
-    .observeOn(AndroidSchedulers.mainThread())
-    .subscribe(s -> {
-        if (!TextUtils.isEmpty(s)) {
-            search_text_clear.setVisibility(View.VISIBLE);
-        } else {
-            search_text_clear.setVisibility(View.GONE);
-        }
-    })
+        RxTextView.textChanges(search_edit)
+                .compose(this.bindToLifecycle())
+                .map(CharSequence::toString)
+                .observeOn(AndroidSchedulers.mainThread())
+//        RxView.clicks(search_text_clear).observeOn(AndroidSchedulers.mainThread()).subscribe(aVoid -> {search_edit.text = ""})
     }
+
 
 
 }

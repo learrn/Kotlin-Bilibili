@@ -9,10 +9,7 @@
     android:fitsSystemWindows="true"
     android:layout_marginTop="@dimen/default_general_margin"
     android:focusable="true"
-    android:focusableInTouchMode="true"
-    app:cardBackgroundColor="@color/cardview_light_background"
-    app:cardCornerRadius="1dp"
-    app:cardElevation="@dimen/app_bar_default_elevation">
+    android:focusableInTouchMode="true">
 
     <ImageView
         android:id="@+id/search_back"

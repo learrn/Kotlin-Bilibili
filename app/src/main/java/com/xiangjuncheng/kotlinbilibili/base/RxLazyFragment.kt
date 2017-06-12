@@ -41,10 +41,10 @@ abstract class RxLazyFragment : RxFragment() {
 
     abstract fun finishCreateView(state:Bundle?)
 
-    override fun onAttach(activity: Activity) {
-        super.onAttach(context)
-        mActivity = activity as FragmentActivity
-    }
+//    override fun onAttach(activity: Activity) {
+//        super.onAttach(context)
+//        mActivity = activity as FragmentActivity
+//    }
 
     override fun onDetach() {
         super.onDetach()

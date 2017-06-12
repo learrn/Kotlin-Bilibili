@@ -60,15 +60,18 @@ class MainActivity : RxBaseActivity(), NavigationView.OnNavigationItemSelectedLi
     private fun initNavigationView() {
         navigationView.setNavigationItemSelectedListener(this)
         val headerView: View = navigationView.getHeaderView(0)
-        (user_avatar_view as CircleImageView).setImageResource(R.drawable.ic_hotbitmapgg_avatar)
+//        val avatarView = findViewById(R.id.user_avatar_view) as CircleImageView
+          (user_avatar_view as? CircleImageView)?.setImageResource(R.drawable.ic_hotbitmapgg_avatar)
+//        avatarView.setImageResource(R.drawable.ic_hotbitmapgg_avatar)
         headerView.user_name.text = resources.getText(R.string.hotbitmapgg)
         headerView.user_other_info.text = resources.getText(R.string.about_user_head_layout)
         headerView.iv_head_switch_mode.setOnClickListener { switchNightMode() }
-        val flag : Boolean by PreferenceUtil(name = ConstantUtil.SWITCH_MODE_KEY, default = false)
-        if (flag)
+        val flag: Boolean by PreferenceUtil(name = ConstantUtil.SWITCH_MODE_KEY, default = false)
+        if (iv_head_switch_mode != null && flag)
             iv_head_switch_mode.setImageResource(R.drawable.ic_switch_daily)
-        else
+        else if (iv_head_switch_mode != null) {
             iv_head_switch_mode.setImageResource(R.drawable.ic_switch_night)
+        }
     }
 
     private fun switchNightMode() {
@@ -156,7 +159,7 @@ class MainActivity : RxBaseActivity(), NavigationView.OnNavigationItemSelectedLi
                 drawer_layout.closeDrawers()
             } else {
                 if (mHomePageFragment != null && mHomePageFragment!!.isOpenSearchView()) {
-                        mHomePageFragment!!.closeSearchView()
+                    mHomePageFragment!!.closeSearchView()
                 } else {
                     exitApp()
                 }
