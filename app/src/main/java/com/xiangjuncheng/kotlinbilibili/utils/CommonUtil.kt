@@ -12,8 +12,7 @@ import java.io.File
  * Created by xiangjuncheng on 2017/5/24.
  * 公用工具类
  */
-class CommonUtil {
-    companion object {
+object CommonUtil {
         /**
          * 检查是否有网络
          */
@@ -79,5 +78,4 @@ class CommonUtil {
         private fun checkSDcard(): Boolean {
             return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)
         }
-    }
 }

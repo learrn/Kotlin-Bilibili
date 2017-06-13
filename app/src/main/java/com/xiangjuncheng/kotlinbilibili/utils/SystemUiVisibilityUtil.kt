@@ -7,8 +7,7 @@ import android.view.WindowManager
 /**
  * Created by xiangjuncheng on 2017/5/25.
  */
-class SystemUiVisibilityUtil {
-    companion object {
+object SystemUiVisibilityUtil {
         fun addFlags(view: View, flags: Int) {
             view.systemUiVisibility = view.systemUiVisibility or flags
         }
@@ -31,5 +30,4 @@ class SystemUiVisibilityUtil {
             window.attributes = p
             window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
         }
-    }
 }

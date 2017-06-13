@@ -3,8 +3,7 @@ package com.xiangjuncheng.kotlinbilibili.utils
 /**
  * Created by xiangjuncheng on 2017/5/24.
  */
-class ConstantUtil {
-    companion object {
+object ConstantUtil {
         val SHOP_URL = "http://bmall.bilibili.com/"
 
         val VIP_URL = "http://vip.bilibili.com/site/vip-faq-h5.html#yv1"
@@ -101,5 +100,4 @@ class ConstantUtil {
         val EXTRA_POSITION = "extra_pos"
 
         val ADVERTISING_RID = 165
-    }
 }

@@ -11,9 +11,6 @@ import android.support.v4.app.FragmentActivity
 import android.support.annotation.LayoutRes
 
 
-
-
-
 abstract class RxLazyFragment : RxFragment() {
     private var parentView: View? = null
 
@@ -96,28 +93,28 @@ abstract class RxLazyFragment : RxFragment() {
     }
 
 
-    protected fun lazyLoad() {}
+    protected open fun lazyLoad() {}
 
 
-    protected fun onInvisible() {}
+    protected open fun onInvisible() {}
 
 
-    protected fun loadData() {}
+    protected open fun loadData() {}
 
 
-    protected fun showProgressBar() {}
+    protected open fun showProgressBar() {}
 
 
-    protected fun hideProgressBar() {}
+    protected open fun hideProgressBar() {}
 
 
-    protected fun initRecyclerView() {}
+    protected open fun initRecyclerView() {}
 
 
-    protected fun initRefreshLayout() {}
+    protected open fun initRefreshLayout() {}
 
 
-    protected fun finishTask() {}
+    protected open fun finishTask() {}
 
 
     fun <T : View> `$`(id: Int): T = parentView?.findViewById(id) as T
