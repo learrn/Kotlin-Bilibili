@@ -1,5 +1,7 @@
 package com.xiangjuncheng.kotlinbilibili.network.api
 
+import com.xiangjuncheng.kotlinbilibili.entity.bangumi.NewBangumiSerialInfo
+import com.xiangjuncheng.kotlinbilibili.entity.video.HDVideoInfo
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

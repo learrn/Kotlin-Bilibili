@@ -1,5 +1,11 @@
 package com.xiangjuncheng.kotlinbilibili.network.api
 
+import com.xiangjuncheng.kotlinbilibili.entity.recommend.RecommendBannerInfo
+import com.xiangjuncheng.kotlinbilibili.entity.recommend.RecommendInfo
+import com.xiangjuncheng.kotlinbilibili.entity.region.RegionDetailsInfo
+import com.xiangjuncheng.kotlinbilibili.entity.region.RegionRecommendInfo
+import com.xiangjuncheng.kotlinbilibili.entity.search.*
+import com.xiangjuncheng.kotlinbilibili.entity.video.VideoDetailsInfo
 import retrofit2.http.GET
 import retrofit2.http.Query
 import rx.Observable

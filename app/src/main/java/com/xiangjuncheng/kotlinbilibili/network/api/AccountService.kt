@@ -1,5 +1,6 @@
 package com.xiangjuncheng.kotlinbilibili.network.api
 
+import com.xiangjuncheng.kotlinbilibili.entity.user.UserDetailsInfo
 import retrofit2.http.GET
 import retrofit2.http.Query
 import rx.Observable

@@ -3,6 +3,7 @@ package com.xiangjuncheng.kotlinbilibili.network.api
 import retrofit2.http.GET
 import okhttp3.ResponseBody
 import com.xiangjuncheng.kotlinbilibili.entity.live.LiveAppIndexInfo
+import com.xiangjuncheng.kotlinbilibili.entity.user.UserLiveRoomStatusInfo
 import retrofit2.http.Query
 import rx.Observable
 

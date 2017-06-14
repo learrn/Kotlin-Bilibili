@@ -1,5 +1,6 @@
 package com.xiangjuncheng.kotlinbilibili.network.api
 
+import com.xiangjuncheng.kotlinbilibili.entity.bangumi.*
 import retrofit2.http.GET
 import rx.Observable
 

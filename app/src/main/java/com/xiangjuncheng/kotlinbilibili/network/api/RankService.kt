@@ -1,5 +1,7 @@
 package com.xiangjuncheng.kotlinbilibili.network.api
 
+import com.xiangjuncheng.kotlinbilibili.entity.discover.AllareasRankInfo
+import com.xiangjuncheng.kotlinbilibili.entity.discover.OriginalRankInfo
 import retrofit2.http.GET
 import retrofit2.http.Path
 import rx.Observable

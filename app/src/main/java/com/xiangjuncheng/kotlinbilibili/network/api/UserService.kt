@@ -1,5 +1,9 @@
 package com.xiangjuncheng.kotlinbilibili.network.api
 
+import com.xiangjuncheng.kotlinbilibili.entity.user.UserChaseBangumiInfo
+import com.xiangjuncheng.kotlinbilibili.entity.user.UserCoinsInfo
+import com.xiangjuncheng.kotlinbilibili.entity.user.UserContributeInfo
+import com.xiangjuncheng.kotlinbilibili.entity.user.UserPlayGameInfo
 import retrofit2.http.GET
 import retrofit2.http.Query
 import rx.Observable

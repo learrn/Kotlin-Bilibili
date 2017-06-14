@@ -1,5 +1,6 @@
 package com.xiangjuncheng.kotlinbilibili.network.api
 
+import com.xiangjuncheng.kotlinbilibili.entity.discover.HotSearchTag
 import retrofit2.http.GET
 import rx.Observable
 

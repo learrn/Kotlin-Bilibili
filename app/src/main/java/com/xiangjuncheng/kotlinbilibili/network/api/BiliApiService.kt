@@ -1,5 +1,13 @@
 package com.xiangjuncheng.kotlinbilibili.network.api
 
+import com.xiangjuncheng.kotlinbilibili.entity.attention.AttentionDynamicInfo
+import com.xiangjuncheng.kotlinbilibili.entity.bangumi.BangumiDetailsCommentInfo
+import com.xiangjuncheng.kotlinbilibili.entity.bangumi.SpecialTopic
+import com.xiangjuncheng.kotlinbilibili.entity.bangumi.SpecialTopicIResult
+import com.xiangjuncheng.kotlinbilibili.entity.discover.ActivityCenterInfo
+import com.xiangjuncheng.kotlinbilibili.entity.discover.TopicCenterInfo
+import com.xiangjuncheng.kotlinbilibili.entity.user.UserFavoritesInfo
+import com.xiangjuncheng.kotlinbilibili.entity.video.VideoCommentInfo
 import retrofit2.http.GET
 import retrofit2.http.Query
 import rx.Observable
