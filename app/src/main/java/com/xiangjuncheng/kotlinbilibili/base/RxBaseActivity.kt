@@ -33,7 +33,7 @@ abstract class RxBaseActivity : RxAppCompatActivity(), CardPickerDialog.ClickLis
     fun hideProgressBar() {}
     fun initRecyclerView() {}
     fun initRefreshLayout() {}
-    fun finishTask() {}
+    open fun finishTask() {}
 
     override fun onConfirm(currentTheme: Int) {
         if (ThemeHelper.getTheme(this@RxBaseActivity) != currentTheme) {

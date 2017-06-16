@@ -1,5 +1,6 @@
 package com.xiangjuncheng.kotlinbilibili.network
 
+import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.xiangjuncheng.kotlinbilibili.BilibiliApp
 import com.xiangjuncheng.kotlinbilibili.network.api.*
 import com.xiangjuncheng.kotlinbilibili.network.auxiliary.ApiConstants

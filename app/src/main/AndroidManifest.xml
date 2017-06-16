@@ -43,7 +43,8 @@
         <activity android:name=".module.search.TotalStationSearchActivity" />
         <activity android:name=".module.entry.OffLineDownloadActivity" />
         <activity android:name=".module.entry.VipActivity" />
-        <activity android:name=".module.home.live.LivePlayerActivity"></activity>
+        <activity android:name=".module.home.live.LivePlayerActivity" />
+        <activity android:name=".module.user.UserInfoDetailsActivity"></activity>
     </application>
 
 </manifest>
