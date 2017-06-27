@@ -10,7 +10,7 @@
     <string name="app_name">KotlinBilibili</string>
     <string name="info_play_times_format">%d</string>
     <string name="info_reviews_format">%d</string>
-    <string name="hotbitmapgg">hotBitmapGG</string>
+    <string name="username">叮咚象</string>
     <string name="github_link">https://github.com/HotBitmapGG</string>
     <string name="sina_weibo_link">新浪微博:http://m.weibo.cn/users/3223089177/qq</string>
     <string name="jianshu_link">简书:http://www.jianshu.com/notebooks/5181955/latest</string>
@@ -99,9 +99,9 @@
 
 
     <!-- Navigation Items -->
-    <string name="item_home">主页</string>
-    <string name="item_group">关注的人</string>
-    <string name="item_tracker">我的钱包</string>
+    <string name="item_home">首页</string>
+    <string name="item_group">我的关注</string>
+    <string name="item_tracker">B币钱包</string>
     <string name="item_downloaded">离线缓存</string>
     <string name="item_favourite">我的收藏</string>
     <string name="item_history">历史记录</string>
@@ -109,10 +109,14 @@
     <string name="item_theme">主题选择</string>
     <string name="item_app">应用推荐</string>
     <string name="item_vip">我的大会员</string>
+    <string name="item_vip_score">会员积分</string>
+    <string name="item_free_service">免流量服务</string>
+    <string name="item_bml">BML订单</string>
+    <string name="item_look_later">稍后在看</string>
 
 
     <!--App 介绍-->
-    <string name="about_user_head_layout">硬币: 47</string>
+    <string name="about_user_head_layout">硬币: 173 B币: 1.3</string>
     <string name="about_introduce">「哔哩哔哩」</string>
     <string name="about_menu_action_share">分享</string>
     <string name="about_developers">关于我</string>

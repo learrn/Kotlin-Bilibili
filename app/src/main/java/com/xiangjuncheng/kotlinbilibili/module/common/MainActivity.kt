@@ -63,7 +63,7 @@ class MainActivity : RxBaseActivity(), NavigationView.OnNavigationItemSelectedLi
 //        val avatarView = findViewById(R.id.user_avatar_view) as CircleImageView
           (user_avatar_view as? CircleImageView)?.setImageResource(R.drawable.ic_hotbitmapgg_avatar)
 //        avatarView.setImageResource(R.drawable.ic_hotbitmapgg_avatar)
-        headerView.user_name.text = resources.getText(R.string.hotbitmapgg)
+        headerView.user_name.text = resources.getText(R.string.username)
         headerView.user_other_info.text = resources.getText(R.string.about_user_head_layout)
         headerView.iv_head_switch_mode.setOnClickListener { switchNightMode() }
         val flag: Boolean by PreferenceUtil(name = ConstantUtil.SWITCH_MODE_KEY, default = false)
@@ -88,7 +88,7 @@ class MainActivity : RxBaseActivity(), NavigationView.OnNavigationItemSelectedLi
         // Handle navigation view item clicks here.
         drawer_layout.closeDrawer(GravityCompat.START)
         when (item.itemId) {
-        // 主页
+        // 首页
             R.id.item_home -> changeFragmentIndex(item, 0)
         // 离线缓存
             R.id.item_download -> startActivity(Intent(this@MainActivity, OffLineDownloadActivity::class.java))

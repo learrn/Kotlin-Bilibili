@@ -23,12 +23,16 @@ class HomePagerAdapter(fm: FragmentManager, context: Context?) : FragmentPagerAd
     override fun getItem(position: Int): Fragment? {
         if (mFragments?.get(position) == null) {
             when (position) {
-                0 -> mFragments?.set(position, HomeLiveFragment.newIntance())
-                1 -> mFragments?.set(position, HomeRecommendedFragment.newInstance())
-                2 -> mFragments?.set(position, HomeBangumiFragment.newInstance())
-                3 -> mFragments?.set(position, HomeRegionFragment.newInstance())
-                4 -> mFragments?.set(position, HomeAttentionFragment.newIntance())
-                5 -> mFragments?.set(position, HomeDiscoverFragment.newInstance())
+                0 -> mFragments?.set(position, HomeLiveFragment)
+                1 -> mFragments?.set(position, HomeLiveFragment)
+                2 -> mFragments?.set(position, HomeLiveFragment)
+                3 -> mFragments?.set(position, HomeLiveFragment)
+                4 -> mFragments?.set(position, HomeLiveFragment)
+//                1 -> mFragments?.set(position, HomeRecommendedFragment.newInstance())
+//                2 -> mFragments?.set(position, HomeBangumiFragment.newInstance())
+//                3 -> mFragments?.set(position, HomeRegionFragment.newInstance())
+//                4 -> mFragments?.set(position, HomeAttentionFragment.newIntance())
+//                5 -> mFragments?.set(position, HomeDiscoverFragment.newInstance())
                 else -> {
                 }
             }

@@ -2,34 +2,21 @@ package com.xiangjuncheng.kotlinbilibili.module.user
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.text.TextUtils
+import android.view.MenuItem
 import android.view.View
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.xiangjuncheng.kotlinbilibili.R
 import com.xiangjuncheng.kotlinbilibili.base.RxBaseActivity
-import com.xiangjuncheng.kotlinbilibili.entity.user.UserPlayGameInfo
-import com.xiangjuncheng.kotlinbilibili.entity.user.UserInterestQuanInfo
-import com.xiangjuncheng.kotlinbilibili.entity.user.UserChaseBangumiInfo
-import com.xiangjuncheng.kotlinbilibili.entity.user.UserFavoritesInfo
-import com.xiangjuncheng.kotlinbilibili.entity.user.UserCoinsInfo
-import com.xiangjuncheng.kotlinbilibili.entity.user.UserContributeInfo
-import com.xiangjuncheng.kotlinbilibili.entity.user.UserLiveRoomStatusInfo
-import com.xiangjuncheng.kotlinbilibili.entity.user.UserDetailsInfo
+import com.xiangjuncheng.kotlinbilibili.entity.user.*
+import com.xiangjuncheng.kotlinbilibili.network.RetrofitHelper
+import com.xiangjuncheng.kotlinbilibili.utils.SystemBarHelper
 import com.xiangjuncheng.kotlinbilibili.widget.CircleImageView
 import kotlinx.android.synthetic.main.activity_user_info.*
-import android.R.attr.name
-import android.support.design.widget.AppBarLayout
-import android.view.MenuItem
-import com.xiangjuncheng.kotlinbilibili.utils.SystemBarHelper
 import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
-import com.xiangjuncheng.kotlinbilibili.network.RetrofitHelper
 import rx.functions.Action0
-import android.support.v4.accessibilityservice.AccessibilityServiceInfoCompat.getDescription
-import android.text.TextUtils
-import com.bumptech.glide.load.resource.bitmap.TransformationUtils.centerCrop
-
-
+import rx.schedulers.Schedulers
 
 
 class UserInfoDetailsActivity : RxBaseActivity() {
@@ -46,33 +33,33 @@ class UserInfoDetailsActivity : RxBaseActivity() {
 
     private val fragments = ArrayList<Fragment>()
 
-    private val userContributeCount: Int = 0
+    private var userContributeCount: Int = 0
 
-    private val userFavoritesCount: Int = 0
+    private var userFavoritesCount: Int = 0
 
-    private val userChaseBangumiCount: Int = 0
+    private var userChaseBangumiCount: Int = 0
 
-    private val userInterestQuanCount: Int = 0
+    private var userInterestQuanCount: Int = 0
 
-    private val userCoinsCount: Int = 0
+    private var userCoinsCount: Int = 0
 
-    private val userPlayGameCount: Int = 0
+    private var userPlayGameCount: Int = 0
 
-    private val mUserContributeInfo: UserContributeInfo? = null
+    private var mUserContributeInfo: UserContributeInfo? = null
 
-    private val mUserFavoritesInfo: UserFavoritesInfo? = null
+    private var mUserFavoritesInfo: UserFavoritesInfo? = null
 
-    private val mUserChaseBangumiInfo: UserChaseBangumiInfo? = null
+    private var mUserChaseBangumiInfo: UserChaseBangumiInfo? = null
 
-    private val mUserInterestQuanInfo: UserInterestQuanInfo? = null
+    private var mUserInterestQuanInfo: UserInterestQuanInfo? = null
 
-    private val mUserCoinsInfo: UserCoinsInfo? = null
+    private var mUserCoinsInfo: UserCoinsInfo? = null
 
-    private val mUserPlayGameInfo: UserPlayGameInfo? = null
+    private var mUserPlayGameInfo: UserPlayGameInfo? = null
 
-    private val mUserLiveRoomStatusInfo: UserLiveRoomStatusInfo? = null
+    private var mUserLiveRoomStatusInfo: UserLiveRoomStatusInfo? = null
 
-    private val userContributes: ArrayList<UserContributeInfo.DataBean.VlistBean>()
+//    private val userContributes: ArrayList<UserContributeInfo.DataBean.VlistBean>()
 
     private val userCoins = ArrayList<UserCoinsInfo.DataBean.ListBean>()
 
@@ -177,10 +164,10 @@ class UserInfoDetailsActivity : RxBaseActivity() {
         //设置粉丝和关注
         user_name.text = mUserDetailsInfo?.card?.name
         tv_follow_users.text = mUserDetailsInfo?.card?.attention.toString()
-        tv_fans.setText(NumberUtil.converString(mUserDetailsInfo?.card?.fans))
+//        tv_fans.setText(NumberUtil.converString(mUserDetailsInfo?.card?.fans))
 
         //设置用户等级
-        setUserLevel(Integer.valueOf(mUserDetailsInfo?.card?.getRank()))
+//        setUserLevel(Integer.valueOf(mUserDetailsInfo?.card?.rank))
 
         //设置用户性别
         when (mUserDetailsInfo?.card?.sex) {
@@ -212,6 +199,62 @@ class UserInfoDetailsActivity : RxBaseActivity() {
 
         //获取用户详情全部数据
         getUserAllData()
+    }
+
+    private fun getUserAllData() {
+
+        RetrofitHelper.getUserAPI()
+                .getUserContributeVideos(mid, 1, 10)
+//                .compose(this.bindToLifecycle<Any>())
+//                .flatMap({
+//                    userContributeInfo ->
+//                    mUserContributeInfo = userContributeInfo as UserContributeInfo
+//                    userContributeCount = userContributeInfo.data!!.count
+//                    userContributeInfo.data!!.vlist?.let { userContributes.addAll(it) }
+//                    RetrofitHelper.getBiliAPI().getUserFavorites(mid)
+//                })
+                .compose(bindToLifecycle<Any>())
+                .flatMap({ userFavoritesInfo ->
+                    mUserFavoritesInfo = userFavoritesInfo as UserFavoritesInfo?
+                    userFavoritesCount = userFavoritesInfo?.data!!.size
+                    userFavorites.addAll(userFavoritesInfo?.data!!)
+                    RetrofitHelper.getUserAPI().getUserChaseBangumis(mid)
+                })
+                .compose(bindToLifecycle<Any>())
+                .flatMap({ userChaseBangumiInfo ->
+                    mUserChaseBangumiInfo = userChaseBangumiInfo as UserChaseBangumiInfo?
+                    userChaseBangumiCount = userChaseBangumiInfo?.data!!.count
+                    userChaseBangumiInfo?.data?.result?.let { userChaseBangumis.addAll(it) }
+                    RetrofitHelper.getIm9API().getUserInterestQuanData(mid, 1, 10)
+                })
+                .compose(bindToLifecycle<Any>())
+                .flatMap({ userInterestQuanInfo ->
+                    mUserInterestQuanInfo = userInterestQuanInfo as UserInterestQuanInfo?
+                    userInterestQuanCount = userInterestQuanInfo?.data?.total_count!!
+                    userInterestQuanInfo?.data?.result?.let { userInterestQuans.addAll(it) }
+                    RetrofitHelper.getUserAPI().getUserCoinVideos(mid)
+                })
+                .compose(bindToLifecycle<Any>())
+                .flatMap({ userCoinsInfo ->
+                    mUserCoinsInfo = userCoinsInfo as UserCoinsInfo?
+                    userCoinsCount = userCoinsInfo?.data!!.count
+                    userCoinsInfo?.data!!.list?.let { userCoins.addAll(it) }
+                    RetrofitHelper.getUserAPI().getUserPlayGames(mid)
+                })
+                .compose(bindToLifecycle<Any>())
+                .flatMap({ userPlayGameInfo ->
+                    mUserPlayGameInfo = userPlayGameInfo as UserPlayGameInfo?
+                    userPlayGameCount = userPlayGameInfo?.data!!.count
+                    userPlayGameInfo?.data!!.games?.let { userPlayGames.addAll(it) }
+                    RetrofitHelper.getLiveAPI().getUserLiveRoomStatus(mid)
+                })
+                .compose(bindToLifecycle<Any>())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ userLiveRoomStatusInfo ->
+                    mUserLiveRoomStatusInfo = userLiveRoomStatusInfo as UserLiveRoomStatusInfo?
+//                    initViewPager()
+                }, { hideProgressBar() })
     }
 
 }

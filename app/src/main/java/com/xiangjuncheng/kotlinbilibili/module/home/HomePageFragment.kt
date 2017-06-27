@@ -59,7 +59,7 @@ object HomePageFragment : RxLazyFragment() {
         view_pager.offscreenPageLimit = 5
         view_pager.adapter = HomePagerAdapter(childFragmentManager, getApplicationContext())
         sliding_tabs.setViewPager(view_pager)
-        view_pager.currentItem = 1
+        //view_pager.currentItem = 0
         navigation_layout.setOnClickListener {
             if (activity is MainActivity){
                 (activity as MainActivity).toggleDrawer()

@@ -13,6 +13,16 @@
             android:checkable="false"
             android:icon="@drawable/ic_nav_vip"
             android:title="@string/item_vip" />
+        <item
+            android:id="@+id/item_vip_score"
+            android:checkable="false"
+            android:icon="@drawable/ic_file_download_black_24dp"
+            android:title="@string/item_vip_score" />
+        <item
+            android:id="@+id/item_free_service"
+            android:checkable="false"
+            android:icon="@drawable/ic_file_download_black_24dp"
+            android:title="@string/item_free_service" />
 
         <item
             android:id="@+id/item_download"
@@ -27,6 +37,16 @@
     <group
         android:id="@+id/group_user"
         android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/item_bml"
+            android:icon="@drawable/ic_star_black_24dp"
+            android:title="@string/item_bml" />
+
+        <item
+            android:id="@+id/item_look_later"
+            android:icon="@drawable/ic_star_black_24dp"
+            android:title="@string/item_look_later" />
 
         <item
             android:id="@+id/item_favourite"

@@ -89,7 +89,7 @@
                     android:id="@+id/user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/hotbitmapgg"
+                    android:text="@string/username"
                     android:textColor="@color/white"
                     android:textSize="@dimen/default_small_text_size" />
 

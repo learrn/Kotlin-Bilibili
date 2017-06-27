@@ -12,13 +12,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.xiangjuncheng.kotlinbilibili.R
 import com.xiangjuncheng.kotlinbilibili.base.RxBaseActivity
-import com.xiangjuncheng.kotlinbilibili.module.user.UserInfoDetailsActivity
 import com.xiangjuncheng.kotlinbilibili.network.RetrofitHelper
 import com.xiangjuncheng.kotlinbilibili.utils.ConstantUtil
 import com.xiangjuncheng.kotlinbilibili.utils.LogUtil
 import com.xiangjuncheng.kotlinbilibili.widget.CircleImageView
 import kotlinx.android.synthetic.main.activity_live_details.*
-import kotlinx.android.synthetic.main.layout_toolbar.*
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -75,7 +73,7 @@ class LivePlayerActivity : RxBaseActivity() {
         }
 
         user_pic.setOnClickListener {
-            UserInfoDetailsActivity.launch(this@LivePlayerActivity, name, mid, face)
+//            UserInfoDetailsActivity.launch(this@LivePlayerActivity, name, mid, face)
             ControlVideo()
             right_play.visibility = View.VISIBLE
         }
@@ -112,13 +110,7 @@ class LivePlayerActivity : RxBaseActivity() {
         video_start_info.visibility = View.GONE
     }
 
-    override fun initToolBar() {
-        toolbar.title = title
-        setSupportActionBar(toolbar)
-        if (supportActionBar != null) {
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        }
-    }
+    override fun initToolBar() {}
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == android.R.id.home) {

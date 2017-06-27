@@ -51,8 +51,8 @@ class LiveAppIndexAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.
         private val TYPE_BANNER = 3
 
         //直播界面Banner ViewHolder
-        class LiveBannerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-            val banner : BannerView = itemView.item_live_banner as BannerView
+        class LiveBannerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+            val banner: BannerView = itemView.item_live_banner as BannerView
         }
 
         //直播界面Item分类 ViewHolder
@@ -67,16 +67,16 @@ class LiveAppIndexAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.
             val itemLiveCover: ImageView = itemView.item_live_cover
             val itemLiveUser: TextView = itemView.item_live_user
             val itemLiveTitle: TextView = itemView.item_live_title
-            val itemLiveUserCover : CircleImageView = itemView.item_live_user_cover as CircleImageView
-            val itemLiveCount : TextView = itemView.item_live_count
-            val itemLiveLayout : CardView = itemView.item_live_layout
+            val itemLiveUserCover: CircleImageView = itemView.item_live_user_cover as CircleImageView
+            val itemLiveCount: TextView = itemView.item_live_count
+            val itemLiveLayout: CardView = itemView.item_live_layout
         }
 
         //直播界面分区类型 ViewHolder
-        class LivePartitionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-            val itemIcon : ImageView = itemView.item_live_partition_icon
-            val itemTitle : TextView = itemView.item_live_partition_title
-            val itemCount : TextView = itemTitle.item_live_partition_count
+        class LivePartitionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+            val itemIcon: ImageView = itemView.item_live_partition_icon
+            val itemTitle: TextView = itemView.item_live_partition_title
+            val itemCount: TextView = itemTitle.item_live_partition_count
         }
 
 
@@ -126,6 +126,17 @@ class LiveAppIndexAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.
         }
     }
 
+    fun getSpanSize(pos: Int): Int {
+        val viewType = getItemViewType(pos)
+        when (viewType) {
+            TYPE_ENTRANCE -> return 3
+            TYPE_LIVE_ITEM -> return 6
+            TYPE_PARTITION -> return 12
+            TYPE_BANNER -> return 12
+        }
+        return 0
+    }
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
         var position = -1
         var liveBean: LiveAppIndexInfo.DataBean.PartitionsBean.LivesBean?
@@ -169,7 +180,7 @@ class LiveAppIndexAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.
                         "当前" + partition?.count + "个直播")
                 val foregroundColorSpan = ForegroundColorSpan(
                         context?.resources!!.getColor(R.color.pink_text_color))
-                stringBuilder.setSpan(foregroundColorSpan,2,stringBuilder.length-3,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                stringBuilder.setSpan(foregroundColorSpan, 2, stringBuilder.length - 3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                 holder.itemCount.text = stringBuilder
             }
             is LiveBannerViewHolder -> bannerEntitys?.let { holder.banner.delayTime(5).build(it) }
@@ -177,9 +188,9 @@ class LiveAppIndexAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.
     }
 
     override fun getItemCount(): Int {
-        if (mLiveAppIndexInfo != null){
+        if (mLiveAppIndexInfo != null) {
             return 1 + entranceIconRes.size + mLiveAppIndexInfo?.data?.partitions?.size!!.times(5)
-        }else{
+        } else {
             return 0
         }
     }
@@ -187,7 +198,7 @@ class LiveAppIndexAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.
     override fun getItemViewType(position: Int): Int {
         if (position == 0)
             return TYPE_BANNER
-        var position =position - 1
+        var position = position - 1
         if (position < entranceSize) {
             return TYPE_ENTRANCE
         } else if (isPartitionTitle(position)) {
