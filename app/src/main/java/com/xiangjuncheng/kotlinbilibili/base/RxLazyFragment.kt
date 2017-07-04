@@ -26,49 +26,46 @@ abstract class RxLazyFragment : RxFragment() {
     abstract fun getLayoutResId(): Int
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        parentView = inflater?.inflate(getLayoutResId(), container, false);
-        mActivity = getSupportActivity();
-        return parentView;
+        parentView = inflater?.inflate(getLayoutResId(), container, false)
+        mActivity = getSupportActivity()
+        return parentView
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState);
-        finishCreateView(savedInstanceState);
+        super.onViewCreated(view, savedInstanceState)
+        finishCreateView(savedInstanceState)
     }
 
-    abstract fun finishCreateView(state:Bundle?)
+    abstract fun finishCreateView(state: Bundle?)
 
-//    override fun onAttach(activity: Activity) {
-//        super.onAttach(context)
-//        mActivity = activity as FragmentActivity
-//    }
+    override fun onAttach(activity: Activity) {
+        super.onAttach(activity)
+        this.mActivity = activity as FragmentActivity
+    }
 
     override fun onDetach() {
         super.onDetach()
-        mActivity = null
+        this.mActivity = null
     }
 
     fun getSupportActivity(): FragmentActivity {
-
         return super.getActivity()
     }
 
 
     fun getSupportActionBar(): android.app.ActionBar {
-
         return getSupportActivity().actionBar
     }
 
 
     fun getApplicationContext(): Context? {
-
-        return if (this.activity == null)
+        if (this.mActivity == null)
             if (activity == null)
-                null
+                return null
             else
-                activity.applicationContext
+                return activity.applicationContext
         else
-            this.activity.applicationContext
+            return this.mActivity!!.applicationContext
     }
 
 
@@ -88,7 +85,6 @@ abstract class RxLazyFragment : RxFragment() {
     }
 
     protected fun onVisible() {
-
         lazyLoad()
     }
 
@@ -116,6 +112,7 @@ abstract class RxLazyFragment : RxFragment() {
 
     protected open fun finishTask() {}
 
-
-    fun <T : View> `$`(id: Int): T = parentView?.findViewById(id) as T
+    fun <T : View> `$`(id: Int): T {
+        return parentView?.findViewById(id) as T
+    }
 }

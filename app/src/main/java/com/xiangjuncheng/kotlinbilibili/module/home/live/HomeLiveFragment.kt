@@ -56,15 +56,16 @@ object HomeLiveFragment : RxLazyFragment() {
     }
 
     override fun loadData() {
-        RetrofitHelper.getLiveAPI()
-                .liveAppIndex
-                .compose(bindToLifecycle())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ liveAppIndexInfo ->
-                    mLiveAppIndexAdapter?.setLiveInfo(liveAppIndexInfo)
-                    finishTask()
-                }) { initEmptyView() }
+        initEmptyView()
+//        RetrofitHelper.getLiveAPI()
+//                .liveAppIndex
+//                .compose(bindToLifecycle())
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe({ liveAppIndexInfo ->
+//                    mLiveAppIndexAdapter?.setLiveInfo(liveAppIndexInfo)
+//                    finishTask()
+//                }) { initEmptyView() }
     }
 
     private fun initEmptyView() {
