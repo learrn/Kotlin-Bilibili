@@ -1,5 +1,7 @@
 package com.xiangjuncheng.kotlinbilibili.module.user
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.text.TextUtils
@@ -75,17 +77,31 @@ class UserInfoDetailsActivity : RxBaseActivity() {
     private val EXTRA_MID = "extra_mid"
     private val EXTRA_AVATAR_URL = "extra_avatar_url"
 
+    companion object {
+        private val EXTRA_USER_NAME = "extra_user_name"
+        private val EXTRA_MID = "extra_mid"
+        private val EXTRA_AVATAR_URL = "extra_avatar_url"
+        fun launch(activity: Activity, name: String?, mid: Int?, avatar_url: String?) {
+            val intent = Intent(activity, UserInfoDetailsActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.putExtra(EXTRA_USER_NAME, name)
+            intent.putExtra(EXTRA_MID, mid)
+            intent.putExtra(EXTRA_AVATAR_URL, avatar_url)
+            activity.startActivity(intent)
+        }
+    }
+
     override fun getLayoutId(): Int = R.layout.activity_user_info
 
     override fun initViews(savedInstanceState: Bundle?) {
         if (intent != null) {
             name = intent.getStringExtra(EXTRA_USER_NAME)
-            mid = intent.getIntExtra(EXTRA_MID,-1)
+            mid = intent.getIntExtra(EXTRA_MID, -1)
             avatar_url = intent.getStringExtra(EXTRA_AVATAR_URL)
         }
 
         user_name.text = name
-        if (avatar_url != null){
+        if (avatar_url != null) {
             Glide.with(this@UserInfoDetailsActivity)
                     .load(avatar_url)
                     .centerCrop()

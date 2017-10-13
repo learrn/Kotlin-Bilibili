@@ -11,6 +11,7 @@ import com.xiangjuncheng.kotlinbilibili.entity.recommend.RecommendInfo
 import com.xiangjuncheng.kotlinbilibili.network.RetrofitHelper
 import com.xiangjuncheng.kotlinbilibili.utils.ConstantUtil
 import com.xiangjuncheng.kotlinbilibili.widget.banner.BannerEntity
+import com.xiangjuncheng.kotlinbilibili.widget.sectioned.SectionedRecyclerViewAdapter
 import kotlinx.android.synthetic.main.fragment_home_recommended.*
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
@@ -107,45 +108,45 @@ object HomeRecommendedFragment : RxLazyFragment() {
                 }
     }
 
-    override fun finishTask() {
-        swipe_refresh_layout.isRefreshing = false
-        mIsRefreshing = false
-        hideEmptyView()
-        convertBanner()
-        mSectionedAdapter.addSection(HomeRecommendBannerSection(banners))
-        val size = results?.size
-        for (i in 0..size - 1) {
-            val type = results?.get(i)?.type
-            if (!TextUtils.isEmpty(type)) {
-                when (type) {
-                    ConstantUtil.TYPE_TOPIC ->
-                        //话题
-                        mSectionedAdapter.addSection(HomeRecommendTopicSection(activity,
-                                results?.get(i)?.body?.get(0)?.cover,
-                                results?.get(i)?.body?.get(0)?.title,
-                                results?.get(i)?.body?.get(0)?.param))
-                    ConstantUtil.TYPE_ACTIVITY_CENTER ->
-                        //活动中心
-                        mSectionedAdapter.addSection(HomeRecommendActivityCenterSection(
-                                activity,
-                                results?.get(i)?.body))
-                    else -> mSectionedAdapter.addSection(HomeRecommendedSection(
-                            activity,
-                            results?.get(i)?.head?.title,
-                            results?.get(i)?.type,
-                            results?.get(1)?.head?.count,
-                            results?.get(i)?.body))
-                }
-            }
-            val style = results?.get(i)?.head?.style
-            if (style == ConstantUtil.STYLE_PIC) {
-                mSectionedAdapter.addSection(HomeRecommendPicSection(activity,
-                        results?.get(i)?.body?.get(0)?.cover,
-                        results?.get(i)?.body?.get(0)?.param))
-            }
-        }
-        mSectionedAdapter.notifyDataSetChanged()
-    }
+//    override fun finishTask() {
+//        swipe_refresh_layout.isRefreshing = false
+//        mIsRefreshing = false
+//        hideEmptyView()
+//        convertBanner()
+//        mSectionedAdapter.addSection(HomeRecommendBannerSection(banners))
+//        val size = results?.size
+//        for (i in 0..(size - 1)) {
+//            val type = results?.get(i)?.type
+//            if (!TextUtils.isEmpty(type)) {
+//                when (type) {
+//                    ConstantUtil.TYPE_TOPIC ->
+//                        //话题
+//                        mSectionedAdapter.addSection(HomeRecommendTopicSection(activity,
+//                                results?.get(i)?.body?.get(0)?.cover,
+//                                results?.get(i)?.body?.get(0)?.title,
+//                                results?.get(i)?.body?.get(0)?.param))
+//                    ConstantUtil.TYPE_ACTIVITY_CENTER ->
+//                        //活动中心
+//                        mSectionedAdapter.addSection(HomeRecommendActivityCenterSection(
+//                                activity,
+//                                results?.get(i)?.body))
+//                    else -> mSectionedAdapter.addSection(HomeRecommendedSection(
+//                            activity,
+//                            results?.get(i)?.head?.title,
+//                            results?.get(i)?.type,
+//                            results?.get(1)?.head?.count,
+//                            results?.get(i)?.body))
+//                }
+//            }
+//            val style = results?.get(i)?.head?.style
+//            if (style == ConstantUtil.STYLE_PIC) {
+//                mSectionedAdapter.addSection(HomeRecommendPicSection(activity,
+//                        results?.get(i)?.body?.get(0)?.cover,
+//                        results?.get(i)?.body?.get(0)?.param))
+//            }
+//        }
+//        mSectionedAdapter?.notifyDataSetChanged()
+//    }
 
     fun initEmptyView() {
         swipe_refresh_layout.isRefreshing = false

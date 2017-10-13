@@ -44,7 +44,10 @@
         <activity android:name=".module.entry.OffLineDownloadActivity" />
         <activity android:name=".module.entry.VipActivity" />
         <activity android:name=".module.home.live.LivePlayerActivity" />
-        <activity android:name=".module.user.UserInfoDetailsActivity"></activity>
+        <activity android:name=".module.user.UserInfoDetailsActivity" />
+        <activity android:name=".module.video.VideoDetailsActivity" />
+        <activity android:name=".module.video.VideoIntroductionFragment" />
+        <activity android:name=".widget.UserTagView"></activity>
     </application>
 
 </manifest>
