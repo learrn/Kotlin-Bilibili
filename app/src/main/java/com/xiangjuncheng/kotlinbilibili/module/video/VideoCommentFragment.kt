@@ -6,7 +6,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import com.xiangjuncheng.kotlinbilibili.R
+import com.xiangjuncheng.kotlinbilibili.adapter.HeaderViewRecyclerAdapter
+import com.xiangjuncheng.kotlinbilibili.adapter.VideoCommentAdapter
 import com.xiangjuncheng.kotlinbilibili.adapter.VideoHotCommentAdapter
+import com.xiangjuncheng.kotlinbilibili.adapter.helper.EndlessRecyclerOnScrollListener
 import com.xiangjuncheng.kotlinbilibili.base.RxLazyFragment
 import com.xiangjuncheng.kotlinbilibili.entity.video.VideoCommentInfo
 import com.xiangjuncheng.kotlinbilibili.network.RetrofitHelper
@@ -57,14 +60,14 @@ class VideoCommentFragment : RxLazyFragment() {
         val mRecyclerAdapter = VideoCommentAdapter(recycle, comments)
         recycle.setHasFixedSize(true)
         val mLinearLayoutManager = LinearLayoutManager(activity)
-        recycle!!.layoutManager = mLinearLayoutManager
+        recycle.layoutManager = mLinearLayoutManager
         mAdapter = HeaderViewRecyclerAdapter(mRecyclerAdapter)
-        recycle!!.adapter = mAdapter
+        recycle.adapter = mAdapter
         createHeadView()
         createLoadMoreView()
-        recycle!!.addOnScrollListener(object : EndlessRecyclerOnScrollListener(mLinearLayoutManager) {
+        recycle.addOnScrollListener(object : EndlessRecyclerOnScrollListener(mLinearLayoutManager) {
 
-            fun onLoadMore(i: Int) {
+            override fun onLoadMore(i: Int) {
                 pageNum++
                 loadData()
                 loadMoreView!!.visibility = View.VISIBLE
@@ -123,7 +126,7 @@ class VideoCommentFragment : RxLazyFragment() {
         mHotCommentRecycler.layoutManager = LinearLayoutManager(activity)
         mVideoHotCommentAdapter = VideoHotCommentAdapter(mHotCommentRecycler, hotComments)
         mHotCommentRecycler.adapter = mVideoHotCommentAdapter
-        mAdapter!!.addHeaderView(headView)
+        mAdapter!!.addHeaderView(headView!!)
     }
 
 
@@ -131,7 +134,7 @@ class VideoCommentFragment : RxLazyFragment() {
 
         loadMoreView = LayoutInflater.from(activity)
                 .inflate(R.layout.layout_load_more, recycle, false)
-        mAdapter!!.addFooterView(loadMoreView)
+        mAdapter!!.addFooterView(loadMoreView!!)
         loadMoreView!!.visibility = View.GONE
     }
 

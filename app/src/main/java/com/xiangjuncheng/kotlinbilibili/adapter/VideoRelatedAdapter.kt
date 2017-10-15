@@ -15,6 +15,7 @@ import com.xiangjuncheng.kotlinbilibili.utils.NumberUtil
 
 /**
  * Created by xiangjuncheng on 2017/10/13.
+ * 视频评论Adapter
  */
 class VideoRelatedAdapter(recyclerView: RecyclerView, private val relates: List<VideoDetailsInfo.DataBean.RelatesBean>) : AbsRecyclerViewAdapter(recyclerView) {
     override fun getItemCount(): Int = relates.size
@@ -30,7 +31,7 @@ class VideoRelatedAdapter(recyclerView: RecyclerView, private val relates: List<
     override fun onBindViewHolder(holder: ClickableViewHolder, position: Int) {
 
         if (holder is ItemViewHolder) {
-            val itemViewHolder = holder as ItemViewHolder
+            val itemViewHolder = holder
             val relatesBean = relates[position]
 
             Glide.with(context)
@@ -46,23 +47,15 @@ class VideoRelatedAdapter(recyclerView: RecyclerView, private val relates: List<
             itemViewHolder.mVideoReviewNum.text = relatesBean.stat?.danmaku?.let { NumberUtil.converString(it) }
             itemViewHolder.mUpName.text = relatesBean.owner?.name
         }
-
         super.onBindViewHolder(holder, position)
     }
 
 
     inner class ItemViewHolder(itemView: View) : AbsRecyclerViewAdapter.ClickableViewHolder(itemView) {
-
         internal var mVideoPic: ImageView = `$`(R.id.item_img)
-
         internal var mVideoTitle: TextView = `$`(R.id.item_title)
-
         internal var mVideoPlayNum: TextView = `$`(R.id.item_play)
-
         internal var mVideoReviewNum: TextView = `$`(R.id.item_review)
-
         internal var mUpName: TextView = `$`(R.id.item_user_name)
-
-
     }
 }

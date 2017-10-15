@@ -28,7 +28,7 @@ abstract class RxBaseActivity : RxAppCompatActivity(), CardPickerDialog.ClickLis
     abstract fun initViews(savedInstanceState: Bundle?)
     abstract fun initToolBar()
 
-    fun loadData() {}
+    open fun loadData() {}
     fun showProgressBar() {}
     fun hideProgressBar() {}
     fun initRecyclerView() {}

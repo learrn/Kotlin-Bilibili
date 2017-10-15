@@ -10,13 +10,23 @@ import java.util.HashMap
  * Created by xiangjuncheng on 2017/10/13.
  */
 class HeaderViewRecyclerAdapter(adapter: RecyclerView.Adapter<*>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    companion object {
 
-    private var mWrappedAdapter: RecyclerView.Adapter<*>? = null
+        private val HEADERS_START = Integer.MIN_VALUE
+
+        private val FOOTERS_START = Integer.MIN_VALUE + 10
+
+        private val ITEMS_START = Integer.MIN_VALUE + 20
+
+        private val ADAPTER_MAX_TYPES = 100
+    }
+
+    var mWrappedAdapter: RecyclerView.Adapter<*>? = null
 
     private val mHeaderViews: MutableList<View>
     private val mFooterViews: MutableList<View>
 
-    private val mItemTypesOffset: MutableMap<Class<*>, Int>
+    private val mItemTypesOffset: HashMap<Class<*>, Int>
 
 
     private val wrappedItemCount: Int
@@ -32,7 +42,7 @@ class HeaderViewRecyclerAdapter(adapter: RecyclerView.Adapter<*>) : RecyclerView
 
 
     private val adapterTypeOffset: Int?
-        get() = mItemTypesOffset[mWrappedAdapter::class.java]
+        get() = mItemTypesOffset[mWrappedAdapter!!::class.java]
 
 
     private val mDataObserver = object : RecyclerView.AdapterDataObserver() {
@@ -78,7 +88,7 @@ class HeaderViewRecyclerAdapter(adapter: RecyclerView.Adapter<*>) : RecyclerView
     init {
         mHeaderViews = ArrayList()
         mFooterViews = ArrayList()
-        mItemTypesOffset = HashMap<Class<*>,Integer>
+        mItemTypesOffset = HashMap<Class<*>, Int>()
         setWrappedAdapter(adapter)
     }
 
@@ -101,7 +111,7 @@ class HeaderViewRecyclerAdapter(adapter: RecyclerView.Adapter<*>) : RecyclerView
         } else {
             val itemCount = mWrappedAdapter!!.itemCount
             return if (position < hCount + itemCount) {
-                adapterTypeOffset + mWrappedAdapter!!.getItemViewType(position - hCount)
+                adapterTypeOffset!! + mWrappedAdapter!!.getItemViewType(position - hCount)
             } else {
                 FOOTERS_START + position - hCount - itemCount
             }
@@ -116,7 +126,7 @@ class HeaderViewRecyclerAdapter(adapter: RecyclerView.Adapter<*>) : RecyclerView
         } else if (viewType < FOOTERS_START + footerCount) {
             StaticViewHolder(mFooterViews[viewType - FOOTERS_START])
         } else {
-            mWrappedAdapter!!.onCreateViewHolder(viewGroup, viewType - adapterTypeOffset)
+            mWrappedAdapter!!.onCreateViewHolder(viewGroup, viewType - adapterTypeOffset!!)
         }
     }
 
@@ -125,7 +135,7 @@ class HeaderViewRecyclerAdapter(adapter: RecyclerView.Adapter<*>) : RecyclerView
 
         val hCount = headerCount
         if (position >= hCount && position < hCount + mWrappedAdapter!!.itemCount) {
-            mWrappedAdapter!!.onBindViewHolder(viewHolder, position - hCount)
+            mWrappedAdapter.onBindViewHolder(viewHolder,position-hCount)
         }
     }
 
@@ -176,14 +186,5 @@ class HeaderViewRecyclerAdapter(adapter: RecyclerView.Adapter<*>) : RecyclerView
 
     private class StaticViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-    companion object {
 
-        private val HEADERS_START = Integer.MIN_VALUE
-
-        private val FOOTERS_START = Integer.MIN_VALUE + 10
-
-        private val ITEMS_START = Integer.MIN_VALUE + 20
-
-        private val ADAPTER_MAX_TYPES = 100
-    }
 }

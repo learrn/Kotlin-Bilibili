@@ -47,7 +47,8 @@
         <activity android:name=".module.user.UserInfoDetailsActivity" />
         <activity android:name=".module.video.VideoDetailsActivity" />
         <activity android:name=".module.video.VideoIntroductionFragment" />
-        <activity android:name=".widget.UserTagView"></activity>
+        <activity android:name=".widget.UserTagView" />
+        <activity android:name=".module.video.VideoPlayerActivity"></activity>
     </application>
 
 </manifest>

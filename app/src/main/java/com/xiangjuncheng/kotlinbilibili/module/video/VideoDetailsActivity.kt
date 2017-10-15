@@ -63,7 +63,7 @@ class VideoDetailsActivity : RxBaseActivity() {
         fab.translationY = -resources.getDimension(R.dimen.floating_action_button_size_half)
         fab.setOnClickListener({ v ->
             VideoPlayerActivity.launch(this@VideoDetailsActivity,
-                    mVideoDetailsInfo?.pages?.get(0)?.cid, mVideoDetailsInfo?.title)
+                    mVideoDetailsInfo?.pages?.get(0)?.cid!!, mVideoDetailsInfo.title!!)
         })
         app_bar_layout.addOnOffsetChangedListener({ _, verticalOffset -> setViewsTranslation(verticalOffset) })
         app_bar_layout.addOnOffsetChangedListener(object : AppBarStateChangeEvent() {
