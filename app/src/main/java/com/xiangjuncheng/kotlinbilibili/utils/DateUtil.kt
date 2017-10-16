@@ -129,7 +129,6 @@ object DateUtil {
         try {
             date = formatter.parse(strTime)
         } catch (e: ParseException) {
-            // TODO Auto-generated catch block
             e.printStackTrace()
         }
 

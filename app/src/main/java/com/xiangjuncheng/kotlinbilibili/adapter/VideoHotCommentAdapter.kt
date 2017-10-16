@@ -55,8 +55,8 @@ class VideoHotCommentAdapter(recyclerView: RecyclerView, private val hotComments
                 else -> mHolder.mUserSex.setImageResource(R.drawable.ic_user_gay_border)
             }
 
-            mHolder.mCommentNum.setText(hotList.reply_count)
-            mHolder.mSpot.setText(hotList.good)
+            mHolder.mCommentNum.text = hotList.reply_count.toString()
+            mHolder.mSpot.text=hotList.good.toString()
             val l = hotList.create_at?.let { DateUtil.stringToLong(it, "yyyy-MM-dd HH:mm") }
             val time = l?.let { DateUtil.getDescriptionTimeFromTimestamp(it) }
             mHolder.mCommentTime.text = time

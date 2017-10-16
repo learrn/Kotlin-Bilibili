@@ -11,7 +11,7 @@ import com.xiangjuncheng.kotlinbilibili.entity.recommend.RecommendInfo
 import com.xiangjuncheng.kotlinbilibili.network.RetrofitHelper
 import com.xiangjuncheng.kotlinbilibili.utils.ConstantUtil
 import com.xiangjuncheng.kotlinbilibili.widget.banner.BannerEntity
-import com.xiangjuncheng.kotlinbilibili.widget.sectioned.SectionedRecyclerViewAdapter
+//import com.xiangjuncheng.kotlinbilibili.widget.sectioned.SectionedRecyclerViewAdapter
 import kotlinx.android.synthetic.main.fragment_home_recommended.*
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
@@ -23,7 +23,7 @@ import rx.schedulers.Schedulers
  */
 object HomeRecommendedFragment : RxLazyFragment() {
     private var mIsRefreshing = false
-    private var mSectionedAdapter: SectionedRecyclerViewAdapter? = null
+//    private var mSectionedAdapter: SectionedRecyclerViewAdapter? = null
     private val banners: ArrayList<BannerEntity>? = null
     private val results: ArrayList<RecommendInfo.ResultBean>? = null
     private val recommendBanners: ArrayList<RecommendBannerInfo.DataBean>? = null
@@ -46,19 +46,19 @@ object HomeRecommendedFragment : RxLazyFragment() {
     }
 
     override fun initRecyclerView() {
-        mSectionedAdapter = SectionedRecyclerViewAdapter()
+//        mSectionedAdapter = SectionedRecyclerViewAdapter()
         val mLayoutManager = GridLayoutManager(activity, 2)
-        mLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-            override fun getSpanSize(position: Int): Int {
-                when (mSectionedAdapter.getSectionItemViewType(position)) {
-                    SectionedRecyclerViewAdapter.VIEW_TYPE_HEADER -> return 2
-                    SectionedRecyclerViewAdapter.VIEW_TYPE_FOOTER -> return 2
-                    else -> return 1
-                }
-            }
-        }
+//        mLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+//            override fun getSpanSize(position: Int): Int {
+//                when (mSectionedAdapter.getSectionItemViewType(position)) {
+//                    SectionedRecyclerViewAdapter.VIEW_TYPE_HEADER -> return 2
+//                    SectionedRecyclerViewAdapter.VIEW_TYPE_FOOTER -> return 2
+//                    else -> return 1
+//                }
+//            }
+//        }
         recycle.layoutManager = mLayoutManager
-        recycle.adapter = mSectionedAdapter
+//        recycle.adapter = mSectionedAdapter
         setRecycleNoScroll()
     }
 
@@ -169,7 +169,7 @@ object HomeRecommendedFragment : RxLazyFragment() {
         recommendBanners?.clear()
         results?.clear()
         mIsRefreshing = true
-        mSectionedAdapter.removeAllSections()
+//        mSectionedAdapter.removeAllSections()
     }
 
 

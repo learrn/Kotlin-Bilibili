@@ -1,8 +1,10 @@
 package com.xiangjuncheng.kotlinbilibili.adapter
 
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import com.xiangjuncheng.kotlinbilibili.adapter.helper.AbsRecyclerViewAdapter
 import java.util.ArrayList
 import java.util.HashMap
 
@@ -135,7 +137,7 @@ class HeaderViewRecyclerAdapter(adapter: RecyclerView.Adapter<*>) : RecyclerView
 
         val hCount = headerCount
         if (position >= hCount && position < hCount + mWrappedAdapter!!.itemCount) {
-            mWrappedAdapter.onBindViewHolder(viewHolder,position-hCount)
+            (mWrappedAdapter as VideoCommentAdapter)!!.onBindViewHolder(viewHolder as AbsRecyclerViewAdapter.ClickableViewHolder,position-hCount)
         }
     }
 

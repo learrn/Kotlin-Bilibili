@@ -212,8 +212,8 @@ class BiliDanmukuParser : BaseDanmakuParser() {
                                     points[i][0] = java.lang.Float.parseFloat(pointArray[0])
                                     points[i][1] = java.lang.Float.parseFloat(pointArray[1])
                                 }
-                                mContext.mDanmakuFactory.fillLinePathData(item!!, points, mDispScaleX,
-                                        mDispScaleY)
+//                                mContext.mDanmakuFactory.fillLinePathData(item!!, points, mDispScaleX,
+//                                        mDispScaleY)
                             }
                         }
                     }

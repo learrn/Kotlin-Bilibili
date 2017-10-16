@@ -76,8 +76,7 @@ class MediaController : FrameLayout {
             }
         }
     }
-
-    private var mPauseListener = OnClickListener{
+    private var mPauseListener = View.OnClickListener{ v ->
         doPauseResume()
         show(sDefaultTimeout)
     }

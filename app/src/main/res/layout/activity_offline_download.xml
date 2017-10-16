@@ -24,7 +24,7 @@
                 android:scrollbars="none" />
 
 
-            <com.hotbitmapgg.bilibili.widget.CustomEmptyView
+            <com.xiangjuncheng.kotlinbilibili.widget.CustomEmptyView
                 android:id="@+id/empty_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.hotbitmapgg.bilibili.widget.progressbar.NumberProgressBar
+                <com.xiangjuncheng.kotlinbilibili.widget.progressbar.NumberProgressBar
                     android:id="@+id/progress_bar"
                     style="@style/NumberProgressBar_Beauty_Red"
                     android:layout_width="match_parent"

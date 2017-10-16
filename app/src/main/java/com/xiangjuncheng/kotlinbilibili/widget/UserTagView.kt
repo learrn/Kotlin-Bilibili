@@ -18,11 +18,11 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.xiangjuncheng.kotlinbilibili.R
 import com.xiangjuncheng.kotlinbilibili.module.user.UserInfoDetailsActivity
 
-class UserTagView(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : FrameLayout(context, attrs, defStyleAttr) {
+class UserTagView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : FrameLayout(context, attrs, defStyleAttr) {
 
-    private lateinit var avatarView: CircleImageView
+    private val avatarView: CircleImageView
 
-    private lateinit var userNameText: TextView
+    private val userNameText: TextView
 
     private var onClickListener: View.OnClickListener? = null
 
@@ -33,6 +33,7 @@ class UserTagView(context: Context, attrs: AttributeSet? = null, defStyleAttr: I
     private var mid = -1
 
     private var avatarUrl: String? = null
+
 
     init {
         @SuppressLint("InflateParams")
@@ -74,21 +75,9 @@ class UserTagView(context: Context, attrs: AttributeSet? = null, defStyleAttr: I
     }
 
 
-    fun getAvatarView(): CircleImageView {
-
-        return this.avatarView
-    }
-
-
     fun setUserName(userName: String) {
 
         userNameText.text = userName
-    }
-
-
-    fun getUserNameText(): TextView {
-
-        return this.userNameText
     }
 
 
@@ -100,7 +89,7 @@ class UserTagView(context: Context, attrs: AttributeSet? = null, defStyleAttr: I
         this.avatarUrl = avatarUrl
         this.setUserName(name)
 
-        Glide.with(getContext())
+        Glide.with(context)
                 .load(this.avatarUrl)
                 .centerCrop()
                 .dontAnimate()
@@ -111,6 +100,7 @@ class UserTagView(context: Context, attrs: AttributeSet? = null, defStyleAttr: I
 
 
     override fun setOnClickListener(listener: View.OnClickListener?) {
+
         this.onClickListener = listener
     }
 }

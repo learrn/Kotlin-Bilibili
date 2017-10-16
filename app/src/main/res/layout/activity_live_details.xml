@@ -105,7 +105,7 @@
         android:background="@color/card_view_background">
 
 
-        <com.hotbitmapgg.bilibili.widget.CircleImageView
+        <com.xiangjuncheng.kotlinbilibili.widget.CircleImageView
             android:id="@+id/user_pic"
             android:layout_width="@dimen/user_avatar_size"
             android:layout_height="@dimen/user_avatar_size"

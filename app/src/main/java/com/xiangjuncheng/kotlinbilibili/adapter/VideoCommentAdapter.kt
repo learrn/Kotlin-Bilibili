@@ -52,8 +52,8 @@ class VideoCommentAdapter(recyclerView: RecyclerView, private val comments: List
                 "男" -> mHolder.mUserSex.setImageResource(R.drawable.ic_user_male)
                 else -> mHolder.mUserSex.setImageResource(R.drawable.ic_user_gay_border)
             }
-            mHolder.mCommentNum.setText(list.reply_count)
-            mHolder.mSpot.setText(list.good)
+            mHolder.mCommentNum.text = list.reply_count.toString()
+            mHolder.mSpot.text = list.good.toString()
             val l = list.create_at?.let { DateUtil.stringToLong(it, "yyyy-MM-dd HH:mm") }
             val time = DateUtil.getDescriptionTimeFromTimestamp(l!!)
             mHolder.mCommentTime.text = time

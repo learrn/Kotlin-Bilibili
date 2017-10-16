@@ -1,14 +1,13 @@
 package com.xiangjuncheng.kotlinbilibili.module.video
 
 import android.app.Activity
-import android.support.v4.app.Fragment
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentStatePagerAdapter
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
 import android.text.TextUtils
 import android.view.Menu
@@ -21,11 +20,15 @@ import com.xiangjuncheng.kotlinbilibili.R
 import com.xiangjuncheng.kotlinbilibili.base.RxBaseActivity
 import com.xiangjuncheng.kotlinbilibili.entity.video.VideoDetailsInfo
 import com.xiangjuncheng.kotlinbilibili.event.AppBarStateChangeEvent
+import com.xiangjuncheng.kotlinbilibili.network.RetrofitHelper
 import com.xiangjuncheng.kotlinbilibili.network.auxiliary.UrlHelper
 import com.xiangjuncheng.kotlinbilibili.utils.ConstantUtil
 import com.xiangjuncheng.kotlinbilibili.utils.DisplayUtil
 import com.xiangjuncheng.kotlinbilibili.utils.SystemBarHelper
 import kotlinx.android.synthetic.main.activity_video_details.*
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
+
 
 class VideoDetailsActivity : RxBaseActivity() {
     companion object {
@@ -42,12 +45,12 @@ class VideoDetailsActivity : RxBaseActivity() {
     private val titles = arrayListOf<String>()
     private var av: Int = 0
     private var imgUrl: String? = null
-    private val mVideoDetailsInfo: VideoDetailsInfo.DataBean? = null
-    override fun getLayoutId(): Int = R.layout.activity_main
+    private var mVideoDetailsInfo: VideoDetailsInfo.DataBean? = null
+    override fun getLayoutId(): Int = R.layout.activity_video_details
 
     override fun initViews(savedInstanceState: Bundle?) {
         if (intent != null) {
-            av = intent.getIntExtra(ConstantUtil.EXTRA_AV, 9527)
+            av = intent.getIntExtra(ConstantUtil.EXTRA_AV, -1)
             imgUrl = intent.getStringExtra(ConstantUtil.EXTRA_IMG_URL)
         }
         Glide.with(this@VideoDetailsActivity)
@@ -63,7 +66,7 @@ class VideoDetailsActivity : RxBaseActivity() {
         fab.translationY = -resources.getDimension(R.dimen.floating_action_button_size_half)
         fab.setOnClickListener({ v ->
             VideoPlayerActivity.launch(this@VideoDetailsActivity,
-                    mVideoDetailsInfo?.pages?.get(0)?.cid!!, mVideoDetailsInfo.title!!)
+                    mVideoDetailsInfo?.pages?.get(0)?.cid!!, mVideoDetailsInfo!!.title!!)
         })
         app_bar_layout.addOnOffsetChangedListener({ _, verticalOffset -> setViewsTranslation(verticalOffset) })
         app_bar_layout.addOnOffsetChangedListener(object : AppBarStateChangeEvent() {
@@ -94,9 +97,10 @@ class VideoDetailsActivity : RxBaseActivity() {
 
     override fun initToolBar() {
         toolbar.title = ""
-        setSupportActionBar(toolbar)
         if (supportActionBar != null) {
+//            setSupportActionBar(toolbar)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            supportActionBar!!.hide()
         }
         collapsing_toolbar.setExpandedTitleColor(Color.TRANSPARENT)
         collapsing_toolbar.setCollapsedTitleTextColor(Color.WHITE)
@@ -157,19 +161,24 @@ class VideoDetailsActivity : RxBaseActivity() {
         val mVideoIntroductionFragment = VideoIntroductionFragment.newInstance(
                 av)
         val mVideoCommentFragment = VideoCommentFragment.newInstance(av)
-        fragments.add(mVideoIntroductionFragment)
-        fragments.add(mVideoCommentFragment)
+        if (!mVideoIntroductionFragment.isAdded){
+            fragments.add(mVideoIntroductionFragment)
+        }
+        if (!mVideoCommentFragment.isAdded){
+            fragments.add(mVideoCommentFragment)
+        }
+        setPagerTitle(mVideoDetailsInfo?.stat?.reply.toString())
     }
 
     private fun setPagerTitle(num: String) {
-
         titles.add("简介")
         titles.add("评论($num)")
 
-        val mAdapter = VideoDetailsPagerAdapter(supportFragmentManager,
-                fragments, titles)
-
-        view_pager.adapter = mAdapter
+        view_pager.adapter =  object : FragmentPagerAdapter(supportFragmentManager) {
+            override fun getItem(position: Int): Fragment = fragments[position]
+            override fun getCount(): Int = fragments.size
+            override fun getPageTitle(position: Int): CharSequence = titles[position]
+        }
         view_pager.offscreenPageLimit = 2
         tab_layout.setViewPager(view_pager)
         measureTabLayoutTextWidth(0)
@@ -189,9 +198,20 @@ class VideoDetailsActivity : RxBaseActivity() {
         tab_layout.indicatorWidth = textWidth / 3
     }
 
-    class VideoDetailsPagerAdapter internal constructor(fm: FragmentManager, private val fragments: ArrayList<Fragment>, private val titles: List<String>) : FragmentStatePagerAdapter(fm) {
-        override fun getItem(position: Int): Fragment = fragments[position]
-        override fun getCount(): Int = fragments.size
-        override fun getPageTitle(position: Int): CharSequence = titles[position]
+    override fun loadData() {
+        RetrofitHelper.getBiliAppAPI()
+                .getVideoDetails(av)
+                .compose(this.bindToLifecycle())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ videoDetails ->
+
+                    mVideoDetailsInfo = videoDetails.data
+                    finishTask()
+                }, {
+                    fab.isClickable = false
+                    fab.backgroundTintList = ColorStateList.valueOf(
+                            resources.getColor(R.color.gray_20))
+                })
     }
 }

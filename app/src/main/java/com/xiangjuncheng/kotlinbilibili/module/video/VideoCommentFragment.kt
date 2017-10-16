@@ -49,12 +49,6 @@ class VideoCommentFragment : RxLazyFragment() {
 
     private var headView: View? = null
 
-
-
-
-
-
-
     override fun initRecyclerView() {
 
         val mRecyclerAdapter = VideoCommentAdapter(recycle, comments)
@@ -67,7 +61,7 @@ class VideoCommentFragment : RxLazyFragment() {
         createLoadMoreView()
         recycle.addOnScrollListener(object : EndlessRecyclerOnScrollListener(mLinearLayoutManager) {
 
-            override fun onLoadMore(i: Int) {
+            override fun onLoadMore(currentPage: Int) {
                 pageNum++
                 loadData()
                 loadMoreView!!.visibility = View.VISIBLE
