@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/user_avatar_margin"
         android:gravity="center_horizontal"
+        android:textColor="@color/focus_text_color"
         android:minWidth="@dimen/user_name_min_width" />
 
 </LinearLayout>

@@ -6,11 +6,10 @@ import com.xiangjuncheng.kotlinbilibili.network.api.*
 import com.xiangjuncheng.kotlinbilibili.network.auxiliary.ApiConstants
 import com.xiangjuncheng.kotlinbilibili.utils.CommonUtil
 import okhttp3.*
-import javax.xml.datatype.DatatypeConstants.SECONDS
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.io.IOException
 import java.util.concurrent.TimeUnit
@@ -27,60 +26,30 @@ object RetrofitHelper {
         initOkHttpClient()
     }
 
-    fun getLiveAPI(): LiveService {
+    fun getLiveAPI(): LiveService = createApi(LiveService::class.java, ApiConstants.LIVE_BASE_URL)
 
-        return createApi(LiveService::class.java, ApiConstants.LIVE_BASE_URL)
-    }
+    fun getBiliAppAPI(): BiliAppService =
+            createApi(BiliAppService::class.java, ApiConstants.APP_BASE_URL)
 
-    fun getBiliAppAPI(): BiliAppService {
+    fun getBiliAPI(): BiliApiService =
+            createApi(BiliApiService::class.java, ApiConstants.API_BASE_URL)
 
-        return createApi(BiliAppService::class.java, ApiConstants.APP_BASE_URL)
-    }
+    fun getBiliGoAPI(): BiliGoService =
+            createApi(BiliGoService::class.java, ApiConstants.BILI_GO_BASE_URL)
 
-    fun getBiliAPI(): BiliApiService {
+    fun getRankAPI(): RankService = createApi(RankService::class.java, ApiConstants.RANK_BASE_URL)
 
-        return createApi(BiliApiService::class.java, ApiConstants.API_BASE_URL)
-    }
+    fun getUserAPI(): UserService = createApi(UserService::class.java, ApiConstants.USER_BASE_URL)
 
-    fun getBiliGoAPI(): BiliGoService {
+    fun getVipAPI(): VipService = createApi(VipService::class.java, ApiConstants.VIP_BASE_URL)
 
-        return createApi(BiliGoService::class.java, ApiConstants.BILI_GO_BASE_URL)
-    }
+    fun getBangumiAPI(): BangumiService = createApi(BangumiService::class.java, ApiConstants.BANGUMI_BASE_URL)
 
-    fun getRankAPI(): RankService {
+    fun getSearchAPI(): SearchService = createApi(SearchService::class.java, ApiConstants.SEARCH_BASE_URL)
 
-        return createApi(RankService::class.java, ApiConstants.RANK_BASE_URL)
-    }
+    fun getAccountAPI(): AccountService = createApi(AccountService::class.java, ApiConstants.ACCOUNT_BASE_URL)
 
-    fun getUserAPI(): UserService {
-
-        return createApi(UserService::class.java, ApiConstants.USER_BASE_URL)
-    }
-
-    fun getVipAPI(): VipService {
-
-        return createApi(VipService::class.java, ApiConstants.VIP_BASE_URL)
-    }
-
-    fun getBangumiAPI(): BangumiService {
-
-        return createApi(BangumiService::class.java, ApiConstants.BANGUMI_BASE_URL)
-    }
-
-    fun getSearchAPI(): SearchService {
-
-        return createApi(SearchService::class.java, ApiConstants.SEARCH_BASE_URL)
-    }
-
-    fun getAccountAPI(): AccountService {
-
-        return createApi(AccountService::class.java, ApiConstants.ACCOUNT_BASE_URL)
-    }
-
-    fun getIm9API(): Im9Service {
-
-        return createApi(Im9Service::class.java, ApiConstants.IM9_BASE_URL)
-    }
+    fun getIm9API(): Im9Service = createApi(Im9Service::class.java, ApiConstants.IM9_BASE_URL)
 
     /**
      * 根据传入的baseUrl，和api创建retrofit
@@ -110,7 +79,7 @@ object RetrofitHelper {
                 if (mOkHttpClient == null) {
                     //设置Http缓存
                     val cache = Cache(File(BilibiliApp.instance
-                            .getCacheDir(), "HttpCache"), 1024 * 1024 * 10)
+                            .cacheDir, "HttpCache"), 1024 * 1024 * 10)
 
                     mOkHttpClient = OkHttpClient.Builder()
                             .cache(cache)
@@ -171,13 +140,13 @@ object RetrofitHelper {
                         .build()
             }
             var response = chain.proceed(request)
-            if (CommonUtil.isNetworkAvailable(BilibiliApp.instance)) {
-                response = response.newBuilder()
+            response = if (CommonUtil.isNetworkAvailable(BilibiliApp.instance)) {
+                response.newBuilder()
                         .removeHeader("Pragma")
                         .header("Cache-Control", "public, max-age=" + maxAge)
                         .build()
             } else {
-                response = response.newBuilder()
+                response.newBuilder()
                         .removeHeader("Pragma")
                         .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
                         .build()

@@ -97,16 +97,15 @@ class VideoDetailsActivity : RxBaseActivity() {
 
     override fun initToolBar() {
         toolbar.title = ""
+        setSupportActionBar(toolbar)
         if (supportActionBar != null) {
-//            setSupportActionBar(toolbar)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            supportActionBar!!.hide()
         }
         collapsing_toolbar.setExpandedTitleColor(Color.TRANSPARENT)
         collapsing_toolbar.setCollapsedTitleTextColor(Color.WHITE)
         SystemBarHelper.immersiveStatusBar(this)
         SystemBarHelper.setHeightAndPadding(this, toolbar)
-        tv_av.text = "av" + av
+        tv_av.text = "av $av"
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -158,13 +157,12 @@ class VideoDetailsActivity : RxBaseActivity() {
                     .dontAnimate()
                     .into(video_preview)
         }
-        val mVideoIntroductionFragment = VideoIntroductionFragment.newInstance(
-                av)
+        val mVideoIntroductionFragment = VideoIntroductionFragment.newInstance(av)
         val mVideoCommentFragment = VideoCommentFragment.newInstance(av)
-        if (!mVideoIntroductionFragment.isAdded){
+        if (!mVideoIntroductionFragment.isAdded) {
             fragments.add(mVideoIntroductionFragment)
         }
-        if (!mVideoCommentFragment.isAdded){
+        if (!mVideoCommentFragment.isAdded) {
             fragments.add(mVideoCommentFragment)
         }
         setPagerTitle(mVideoDetailsInfo?.stat?.reply.toString())
@@ -174,7 +172,7 @@ class VideoDetailsActivity : RxBaseActivity() {
         titles.add("简介")
         titles.add("评论($num)")
 
-        view_pager.adapter =  object : FragmentPagerAdapter(supportFragmentManager) {
+        view_pager.adapter = object : FragmentPagerAdapter(supportFragmentManager) {
             override fun getItem(position: Int): Fragment = fragments[position]
             override fun getCount(): Int = fragments.size
             override fun getPageTitle(position: Int): CharSequence = titles[position]

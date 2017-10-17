@@ -80,6 +80,10 @@
             android:layout_marginStart="@dimen/title_margin_small"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textColor="@color/black_alpha_45" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:background="@color/line_bg" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -96,7 +100,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="horizontal">
+
+
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:clickable="false"
+                    android:src="@drawable/ic_share_green" />
 
                 <TextView
                     android:id="@+id/share_num"
@@ -104,23 +117,6 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/default_tiny_padding"
                     android:textColor="@color/green_300" />
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/daily_video_action_bg"
-                    android:clickable="false"
-                    android:src="@drawable/ic_share_green" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/default_tiny_padding"
-                    android:text="@string/about_menu_action_share"
-                    android:textColor="@color/font_normal"
-                    android:textSize="@dimen/default_tiny_text_size" />
-
-
             </LinearLayout>
 
 
@@ -130,7 +126,15 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="horizontal">
+
+
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:src="@drawable/ic_coin" />
 
                 <TextView
                     android:id="@+id/coin_num"
@@ -138,20 +142,6 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/default_tiny_padding"
                     android:textColor="@color/orange_500" />
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/daily_video_action_bg"
-                    android:src="@drawable/ic_coin" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/default_tiny_padding"
-                    android:text="@string/coin"
-                    android:textColor="@color/font_normal"
-                    android:textSize="@dimen/default_tiny_text_size" />
 
 
             </LinearLayout>
@@ -163,7 +153,15 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="horizontal">
+
+
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:src="@drawable/ic_collect" />
 
                 <TextView
                     android:id="@+id/fav_num"
@@ -171,20 +169,6 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/default_tiny_padding"
                     android:textColor="@color/pink_text_color" />
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/daily_video_action_bg"
-                    android:src="@drawable/ic_collect" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/default_tiny_padding"
-                    android:text="@string/collection"
-                    android:textColor="@color/font_normal"
-                    android:textSize="@dimen/default_tiny_text_size" />
 
 
             </LinearLayout>
@@ -195,18 +179,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/default_tiny_padding"
-                    android:textColor="@color/colorPrimary" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/daily_video_action_bg"
+                    android:background="@color/white"
                     android:src="@drawable/ic_download" />
 
                 <TextView
@@ -214,7 +193,7 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/default_tiny_padding"
                     android:text="@string/cache"
-                    android:textColor="@color/font_normal"
+                    android:textColor="@color/blue_trans"
                     android:textSize="@dimen/default_tiny_text_size" />
 
 
@@ -224,7 +203,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/line_height"
+            android:layout_height="@dimen/default_tiny_padding"
             android:background="@color/gray_light" />
 
         <RelativeLayout
@@ -238,16 +217,28 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_centerInParent="true" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@+id/follow"
+                android:layout_marginEnd="@dimen/default_general_margin"
+                android:layout_centerInParent="true"
+                android:background="@drawable/btn_pin_bg"
+                android:gravity="center"
+                android:text="@string/charg"
+                android:textColor="@color/focus_text_color" />
 
             <TextView
+                android:id="@+id/follow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerInParent="true"
-                android:background="@drawable/btn_pin_bg"
+                android:background="@drawable/btn_pin_solid_bg"
                 android:gravity="center"
                 android:text="@string/add_follow"
-                android:textColor="@color/focus_text_color" />
+                android:textColor="@color/white" />
+
 
         </RelativeLayout>
 
@@ -255,7 +246,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_height"
-            android:background="@color/gray_light" />
+            android:background="@color/line_bg" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -294,7 +285,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/line_height"
+            android:layout_height="@dimen/default_tiny_padding"
             android:background="@color/gray_light" />
 
         <RelativeLayout

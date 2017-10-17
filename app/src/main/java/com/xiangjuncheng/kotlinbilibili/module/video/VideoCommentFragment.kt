@@ -60,7 +60,6 @@ class VideoCommentFragment : RxLazyFragment() {
         createHeadView()
         createLoadMoreView()
         recycle.addOnScrollListener(object : EndlessRecyclerOnScrollListener(mLinearLayoutManager) {
-
             override fun onLoadMore(currentPage: Int) {
                 pageNum++
                 loadData()
@@ -79,7 +78,6 @@ class VideoCommentFragment : RxLazyFragment() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ videoComment ->
-
                     val list = videoComment.list
                     val hotList = videoComment.hotList!!
                     if ( pageSize < list?.size!!) {

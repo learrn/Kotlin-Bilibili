@@ -21,10 +21,6 @@
             android:layout_marginBottom="@dimen/list_item_vertical_margin_small"
             android:layout_marginTop="@dimen/list_item_vertical_margin_small" />
 
-        <ImageView
-            android:id="@+id/item_user_lever"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
 
 
     </LinearLayout>
@@ -46,18 +42,20 @@
             android:textSize="@dimen/default_small_text_size" />
 
         <ImageView
-            android:id="@+id/item_user_sex"
+            android:id="@+id/item_user_lever"
+            android:layout_marginTop="@dimen/default_tiny_padding"
+            android:layout_marginStart="@dimen/default_tiny_padding"
+            android:layout_toEndOf="@+id/item_user_name"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_tiny_margin"
-            android:layout_toEndOf="@+id/item_user_name" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/item_comment_floor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/item_user_name"
-            android:layout_marginTop="@dimen/default_tiny_margin"
+            android:layout_marginEnd="@dimen/default_general_margin"
+            android:layout_toStartOf="@+id/item_comment_time"
+            android:drawablePadding="@dimen/default_tiny_padding"
             android:textColor="@color/black_alpha_30"
             android:textSize="@dimen/default_tiny_text_size" />
 
@@ -65,45 +63,11 @@
             android:id="@+id/item_comment_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/item_user_name"
-            android:layout_marginStart="@dimen/default_tiny_padding"
-            android:layout_marginTop="@dimen/default_tiny_margin"
-            android:layout_toEndOf="@+id/item_comment_floor"
-            android:textColor="@color/black_alpha_30"
-            android:textSize="@dimen/default_tiny_text_size" />
-
-        <TextView
-            android:id="@+id/item_comment_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/default_general_margin"
-            android:layout_toStartOf="@+id/item_comment_spot"
-            android:drawablePadding="@dimen/default_tiny_padding"
-            android:drawableStart="@drawable/ic_feedback_grey"
-            android:textColor="@color/black_alpha_45"
-            android:textSize="@dimen/default_tiny_text_size" />
-
-
-        <TextView
-            android:id="@+id/item_comment_spot"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/default_grow_margin"
-            android:layout_toStartOf="@+id/item_comment_more"
-            android:drawablePadding="@dimen/default_tiny_padding"
-            android:drawableStart="@drawable/ic_feedback_support_grey"
-            android:textColor="@color/black_alpha_45"
-            android:textSize="@dimen/default_tiny_text_size" />
-
-        <ImageView
-            android:id="@+id/item_comment_more"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="@dimen/default_tiny_padding"
-            android:paddingTop="1dp"
-            android:src="@drawable/ic_more_grey" />
-
+            android:drawablePadding="@dimen/default_tiny_padding"
+            android:textColor="@color/black_alpha_30"
+            android:textSize="@dimen/default_tiny_text_size" />
 
         <TextView
             android:id="@+id/item_comment_content"
@@ -115,6 +79,53 @@
             android:paddingTop="@dimen/default_tiny_padding"
             android:textColor="@color/font_normal"
             android:textSize="@dimen/default_small_text_size" />
+
+        <TextView
+            android:id="@+id/item_comment_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/item_comment_content"
+            android:layout_marginTop="@dimen/default_tiny_padding"
+            android:drawablePadding="@dimen/default_tiny_padding"
+            android:drawableStart="@drawable/ic_comment"
+            android:textColor="@color/black_alpha_45"
+            android:textSize="@dimen/default_tiny_text_size" />
+
+
+        <TextView
+            android:id="@+id/item_comment_spot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/item_comment_content"
+            android:layout_marginTop="@dimen/default_tiny_padding"
+            android:layout_marginStart="@dimen/default_grow_margin"
+            android:layout_toEndOf="@+id/item_comment_num"
+            android:drawablePadding="@dimen/default_tiny_padding"
+            android:drawableStart="@drawable/ic_feedback_like_gray_v2"
+            android:textColor="@color/black_alpha_45"
+            android:textSize="@dimen/default_tiny_text_size" />
+        <TextView
+            android:id="@+id/item_comment_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/item_comment_content"
+            android:layout_marginTop="@dimen/default_tiny_padding"
+            android:layout_marginStart="@dimen/default_grow_margin"
+            android:layout_toEndOf="@+id/item_comment_spot"
+            android:drawablePadding="@dimen/default_tiny_padding"
+            android:drawableStart="@drawable/ic_feedback_disagree_gray_v2"
+            android:textColor="@color/black_alpha_45"
+            android:textSize="@dimen/default_tiny_text_size" />
+
+        <ImageView
+            android:layout_marginTop="@dimen/default_tiny_padding"
+            android:id="@+id/item_comment_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/item_comment_content"
+            android:layout_marginEnd="@dimen/default_tiny_padding"
+            android:src="@drawable/ic_more_grey" />
 
 
     </RelativeLayout>

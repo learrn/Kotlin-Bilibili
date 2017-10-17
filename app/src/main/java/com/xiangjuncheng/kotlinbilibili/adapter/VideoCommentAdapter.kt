@@ -47,11 +47,6 @@ class VideoCommentAdapter(recyclerView: RecyclerView, private val comments: List
             val currentLevel = list.level_info?.current_level
             checkLevel(currentLevel!!, mHolder)
 
-            when (list.sex) {
-                "女" -> mHolder.mUserSex.setImageResource(R.drawable.ic_user_female)
-                "男" -> mHolder.mUserSex.setImageResource(R.drawable.ic_user_male)
-                else -> mHolder.mUserSex.setImageResource(R.drawable.ic_user_gay_border)
-            }
             mHolder.mCommentNum.text = list.reply_count.toString()
             mHolder.mSpot.text = list.good.toString()
             val l = list.create_at?.let { DateUtil.stringToLong(it, "yyyy-MM-dd HH:mm") }
@@ -80,7 +75,6 @@ class VideoCommentAdapter(recyclerView: RecyclerView, private val comments: List
         internal var mUserAvatar: CircleImageView = `$`(R.id.item_user_avatar)
         internal var mUserName: TextView = `$`(R.id.item_user_name)
         internal var mUserLv: ImageView = `$`(R.id.item_user_lever)
-        internal var mUserSex: ImageView = `$`(R.id.item_user_sex)
         internal var mFloor: TextView = `$`(R.id.item_comment_floor)
         internal var mCommentTime: TextView = `$`(R.id.item_comment_time)
         internal var mCommentNum: TextView = `$`(R.id.item_comment_num)

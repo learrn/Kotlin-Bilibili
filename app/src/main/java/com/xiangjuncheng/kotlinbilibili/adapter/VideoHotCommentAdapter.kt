@@ -49,11 +49,6 @@ class VideoHotCommentAdapter(recyclerView: RecyclerView, private val hotComments
             val currentLevel = hotList.level_info?.current_level
             currentLevel?.let { checkLevel(it, mHolder) }
 
-            when (hotList.sex) {
-                "女" -> mHolder.mUserSex.setImageResource(R.drawable.ic_user_female)
-                "男" -> mHolder.mUserSex.setImageResource(R.drawable.ic_user_male)
-                else -> mHolder.mUserSex.setImageResource(R.drawable.ic_user_gay_border)
-            }
 
             mHolder.mCommentNum.text = hotList.reply_count.toString()
             mHolder.mSpot.text=hotList.good.toString()
@@ -101,8 +96,6 @@ class VideoHotCommentAdapter(recyclerView: RecyclerView, private val hotComments
         internal var mUserName: TextView = `$`(R.id.item_user_name)
 
         internal var mUserLv: ImageView = `$`(R.id.item_user_lever)
-
-        internal var mUserSex: ImageView = `$`(R.id.item_user_sex)
 
         internal var mFloor: TextView = `$`(R.id.item_comment_floor)
 
