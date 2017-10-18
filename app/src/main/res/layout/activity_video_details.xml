@@ -79,6 +79,7 @@
                         android:text="@string/play_immediately"
                         android:textColor="@color/white"
                         android:textSize="@dimen/default_big_text_size"
+                        android:clickable="true"
                         android:visibility="gone" />
 
 

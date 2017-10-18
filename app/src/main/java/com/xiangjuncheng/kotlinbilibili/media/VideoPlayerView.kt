@@ -51,7 +51,7 @@ class VideoPlayerView : SurfaceView, MediaPlayerListener {
     private val mCanSeekForward = true
     private var mContext: Context? = null
 
-    internal var mSizeChangedListener: IMediaPlayer.OnVideoSizeChangedListener = IMediaPlayer.OnVideoSizeChangedListener { mp, width, height, sarNum, sarDen ->
+    private var mSizeChangedListener: IMediaPlayer.OnVideoSizeChangedListener = IMediaPlayer.OnVideoSizeChangedListener { mp, width, height, sarNum, sarDen ->
         DebugLog.dfmt(TAG, "onVideoSizeChanged: (%dx%d)", width, height)
         videoWidth = mp.videoWidth
         videoHeight = mp.videoHeight
@@ -62,7 +62,7 @@ class VideoPlayerView : SurfaceView, MediaPlayerListener {
         }
     }
 
-    internal var mPreparedListener: IMediaPlayer.OnPreparedListener = IMediaPlayer.OnPreparedListener { mp ->
+    private var mPreparedListener: IMediaPlayer.OnPreparedListener = IMediaPlayer.OnPreparedListener { mp ->
         DebugLog.d(TAG, "onPrepared")
         mCurrentState = STATE_PREPARED
         mTargetState = STATE_PLAYING

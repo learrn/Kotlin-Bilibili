@@ -12,5 +12,5 @@
     android:paddingEnd="@dimen/tab_bar_item_padding"
     android:paddingStart="@dimen/tab_bar_item_padding"
     android:paddingTop="@dimen/default_tiny_padding"
-    android:textColor="@color/black_alpha_45"
+    android:textColor="@color/black_80"
     android:textSize="@dimen/default_small_text_size" />

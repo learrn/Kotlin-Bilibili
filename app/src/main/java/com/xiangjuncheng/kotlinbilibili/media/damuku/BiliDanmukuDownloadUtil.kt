@@ -23,9 +23,7 @@ object BiliDanmukuDownloadUtil {
         return Observable.create(Observable.OnSubscribe<BaseDanmakuParser>{ subscriber ->
             if (TextUtils.isEmpty(uri)) {
                 subscriber.onNext(object : BaseDanmakuParser() {
-                    override fun parse(): IDanmakus {
-                        return Danmakus()
-                    }
+                    override fun parse(): IDanmakus = Danmakus()
                 })
             }
             var loader: ILoader? = null

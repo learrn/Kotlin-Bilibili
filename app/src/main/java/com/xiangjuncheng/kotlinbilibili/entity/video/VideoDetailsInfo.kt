@@ -411,6 +411,7 @@ class VideoDetailsInfo {
             var tag_id: Int = 0
 
             var tag_name: String? = null
+            override fun toString(): String = tag_name!!
         }
     }
 }

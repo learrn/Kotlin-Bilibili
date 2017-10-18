@@ -81,11 +81,11 @@ class BiliDanmukuParser : BaseDanmakuParser() {
                 val pValue = attributes.getValue("p")
                 // parse p value to danmaku
                 val values = pValue.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-                if (values.size > 0) {
+                if (values.isNotEmpty()) {
                     val time = (java.lang.Float.parseFloat(values[0]) * 1000).toLong() // 出现时间
                     val type = Integer.parseInt(values[1]) // 弹幕类型
                     val textSize = java.lang.Float.parseFloat(values[2]) // 字体大小
-                    val color = (0x00000000ff000000.toInt() or values[3].toInt() and 0x00000000ffffffff.toInt()).toInt() // 颜色
+                    val color = (0x00000000ff000000.toInt() or values[3].toInt() and 0x00000000ffffffff.toInt()) // 颜色
                     // int poolType = Integer.parseInt(values[5]); // 弹幕池类型 忽略
                     item = mContext.mDanmakuFactory.createDanmaku(type, mContext)
                     if (item != null) {
@@ -244,9 +244,7 @@ class BiliDanmukuParser : BaseDanmakuParser() {
     }
 
 
-    private fun isPercentageNumber(number: Float): Boolean {
-        return number >= 0f && number <= 1f
-    }
+    private fun isPercentageNumber(number: Float): Boolean = number in 0f..1f
 
 
     override fun setDisplayer(disp: IDisplayer): BaseDanmakuParser {

@@ -65,10 +65,17 @@ class VideoIntroductionFragment : RxLazyFragment() {
         tv_play_time.text = mVideoDetailsInfo.stat?.view?.let { NumberUtil.converString(it) }
         tv_review_count.text = mVideoDetailsInfo.stat?.danmaku?.let { NumberUtil.converString(it) }
         tv_description.text = mVideoDetailsInfo.desc
-        author_tag.setUpWithInfo(activity,mVideoDetailsInfo.owner?.name!!,mVideoDetailsInfo.owner?.mid!!, mVideoDetailsInfo.owner?.face!!)
         share_num.text = mVideoDetailsInfo.stat?.share?.let { NumberUtil.converString(it) }
         fav_num.text = mVideoDetailsInfo.stat?.favorite?.let { NumberUtil.converString(it) }
         coin_num.text = mVideoDetailsInfo.stat?.coin?.let { NumberUtil.converString(it) }
+        RetrofitHelper.getAccountAPI()
+                .getUserInfoById(mVideoDetailsInfo.owner?.mid!!)
+                .compose(this.bindToLifecycle())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {userInfo ->
+                    author_tag.setUpWithInfo(activity,mVideoDetailsInfo.owner?.name!!,mVideoDetailsInfo.owner?.mid!!, mVideoDetailsInfo.owner?.face!!,userInfo.card?.fans!!)
+                }
         setVideoTags()
         setVideoRelated()
     }
@@ -97,12 +104,12 @@ class VideoIntroductionFragment : RxLazyFragment() {
 
     private fun setVideoTags() {
 
-        val tags = mVideoDetailsInfo.tags
-        tags_layout.setAdapter(object : TagAdapter<String>(tags) {
-            override fun getView(parent: FlowLayout, position: Int, s: String): View {
+        val tags = mVideoDetailsInfo.tag
+        tags_layout.setAdapter(object : TagAdapter<VideoDetailsInfo.DataBean.TagBean>(tags) {
+            override fun getView(parent: FlowLayout?, position: Int, t: VideoDetailsInfo.DataBean.TagBean?): View {
                 val mTags = LayoutInflater.from(activity)
                         .inflate(R.layout.layout_tags_item, parent, false) as TextView
-                mTags.text = s
+                mTags.text = t?.tag_name
                 return mTags
             }
         })

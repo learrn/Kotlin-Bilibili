@@ -64,10 +64,14 @@ class VideoDetailsActivity : RxBaseActivity() {
         fab.isClickable = true
         fab.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.gray_20))
         fab.translationY = -resources.getDimension(R.dimen.floating_action_button_size_half)
-        fab.setOnClickListener({ v ->
+        fab.setOnClickListener{
             VideoPlayerActivity.launch(this@VideoDetailsActivity,
                     mVideoDetailsInfo?.pages?.get(0)?.cid!!, mVideoDetailsInfo!!.title!!)
-        })
+        }
+        tv_player.setOnClickListener{
+            VideoPlayerActivity.launch(this@VideoDetailsActivity,
+                    mVideoDetailsInfo?.pages?.get(0)?.cid!!, mVideoDetailsInfo!!.title!!)
+        }
         app_bar_layout.addOnOffsetChangedListener({ _, verticalOffset -> setViewsTranslation(verticalOffset) })
         app_bar_layout.addOnOffsetChangedListener(object : AppBarStateChangeEvent() {
             override fun onStateChanged(appBarLayout: AppBarLayout, state: State, verticalOffset: Int) {
@@ -203,7 +207,6 @@ class VideoDetailsActivity : RxBaseActivity() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ videoDetails ->
-
                     mVideoDetailsInfo = videoDetails.data
                     finishTask()
                 }, {

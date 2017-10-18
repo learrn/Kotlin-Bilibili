@@ -13,15 +13,29 @@
         android:layout_width="@dimen/user_avatar_size"
         android:layout_height="@dimen/user_avatar_size"
         android:layout_margin="@dimen/user_avatar_margin" />
-
-    <TextView
-        android:id="@+id/user_name"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/user_avatar_margin"
-        android:gravity="center_horizontal"
-        android:textColor="@color/focus_text_color"
-        android:minWidth="@dimen/user_name_min_width" />
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/user_avatar_margin"
+            android:textColor="@color/focus_text_color"
+            android:minWidth="@dimen/user_name_min_width" />
+        <TextView
+            android:id="@+id/user_follow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:layout_marginTop="@dimen/user_avatar_margin"
+            android:layout_marginEnd="@dimen/user_avatar_margin"
+            android:gravity="center_horizontal"
+            android:minWidth="@dimen/user_name_min_width" />
+
+    </LinearLayout>
+
 
 </LinearLayout>
 

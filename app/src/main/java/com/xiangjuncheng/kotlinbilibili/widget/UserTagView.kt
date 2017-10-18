@@ -24,6 +24,8 @@ class UserTagView @JvmOverloads constructor(context: Context, attrs: AttributeSe
 
     private val userNameText: TextView
 
+    private val userFollow: TextView
+
     private var onClickListener: View.OnClickListener? = null
 
     private var activity: Activity? = null
@@ -41,6 +43,7 @@ class UserTagView @JvmOverloads constructor(context: Context, attrs: AttributeSe
                 .inflate(R.layout.layout_user_tag_view, null) as LinearLayout
         avatarView = cardView.findViewById(R.id.user_avatar) as CircleImageView
         userNameText = cardView.findViewById(R.id.user_name) as TextView
+        userFollow = cardView.findViewById(R.id.user_follow) as TextView
 
         val lp = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 resources.getDimensionPixelSize(R.dimen.user_tag_view_height))
@@ -80,14 +83,19 @@ class UserTagView @JvmOverloads constructor(context: Context, attrs: AttributeSe
         userNameText.text = userName
     }
 
+    fun setUserFollow(userFollow: Int) {
+        this.userFollow.text = "$userFollow 人关注"
+    }
 
-    fun setUpWithInfo(activity: Activity, name: String, mid: Int, avatarUrl: String) {
+
+    fun setUpWithInfo(activity: Activity, name: String, mid: Int, avatarUrl: String, fans: Int) {
 
         this.activity = activity
         this.name = name
         this.mid = mid
         this.avatarUrl = avatarUrl
         this.setUserName(name)
+        this.setUserFollow(fans)
 
         Glide.with(context)
                 .load(this.avatarUrl)

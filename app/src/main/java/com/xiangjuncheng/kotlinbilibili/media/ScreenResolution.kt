@@ -19,10 +19,10 @@ object ScreenResolution {
      * @return a pair to return the width and height
      */
     fun getResolution(ctx: Context): Pair<Int, Int> {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            return getRealResolution(ctx)
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            getRealResolution(ctx)
         } else {
-            return getRealResolutionOnOldDevice(ctx)
+            getRealResolutionOnOldDevice(ctx)
         }
     }
 
@@ -33,17 +33,17 @@ object ScreenResolution {
      * Fall back to getDisplayMetrics if the above method failed.
      */
     private fun getRealResolutionOnOldDevice(ctx: Context): Pair<Int, Int> {
-        try {
+        return try {
             val wm = ctx.getSystemService(Context.WINDOW_SERVICE) as WindowManager
             val display = wm.defaultDisplay
             val mGetRawWidth = Display::class.java.getMethod("getRawWidth")
             val mGetRawHeight = Display::class.java.getMethod("getRawHeight")
             val realWidth = mGetRawWidth.invoke(display) as Int
             val realHeight = mGetRawHeight.invoke(display) as Int
-            return Pair(realWidth, realHeight)
+            Pair(realWidth, realHeight)
         } catch (e: Exception) {
             val disp = ctx.resources.displayMetrics
-            return Pair(disp.widthPixels, disp.heightPixels)
+            Pair(disp.widthPixels, disp.heightPixels)
         }
 
     }
