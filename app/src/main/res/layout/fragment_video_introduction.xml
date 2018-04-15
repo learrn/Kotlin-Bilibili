@@ -107,7 +107,7 @@
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:background="@color/transparent"
                     android:clickable="false"
                     android:src="@drawable/ic_share_green" />
 
@@ -133,7 +133,7 @@
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:background="@color/transparent"
                     android:src="@drawable/ic_coin" />
 
                 <TextView
@@ -160,7 +160,7 @@
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:background="@color/transparent"
                     android:src="@drawable/ic_collect" />
 
                 <TextView
@@ -185,7 +185,7 @@
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:background="@color/transparent"
                     android:src="@drawable/ic_download" />
 
                 <TextView
@@ -312,8 +312,6 @@
             android:clipToPadding="false"
             android:overScrollMode="never"
             android:scrollbars="none" />
-
-
     </LinearLayout>
 
 

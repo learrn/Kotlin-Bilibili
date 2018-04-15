@@ -40,11 +40,12 @@ open class VideoPlayerActivity : RxBaseActivity(), DanmukuSwitchListener, VideoB
     override fun getLayoutId(): Int = R.layout.activity_video_player
 
     override fun initViews(savedInstanceState: Bundle?) {
-        mDanmakuView =findViewById(R.id.sv_danmaku) as IDanmakuView
+        mDanmakuView = findViewById(R.id.sv_danmaku) as IDanmakuView
         val intent = intent
         if (intent != null) {
             cid = intent.getIntExtra(ConstantUtil.EXTRA_CID, 0)
             title = intent.getStringExtra(ConstantUtil.EXTRA_TITLE)
+            aid = intent.getIntExtra(ConstantUtil.EXTRA_AV, 0)
         }
         initAnimation()
         initMediaPlayer()
@@ -53,12 +54,12 @@ open class VideoPlayerActivity : RxBaseActivity(), DanmukuSwitchListener, VideoB
     private var mDanmakuView: IDanmakuView? = null
     private var cid: Int = 0
     private var title: String? = null
+    private var aid: Int = 0
     private var LastPosition = 0
     private var startText = "初始化播放器..."
     private var mLoadingAnim: AnimationDrawable? = null
     private var danmakuContext: DanmakuContext? = null
 
-    
 
     @SuppressLint("UseSparseArrays")
     private fun initMediaPlayer() {
@@ -121,10 +122,15 @@ open class VideoPlayerActivity : RxBaseActivity(), DanmukuSwitchListener, VideoB
      * 获取视频数据以及解析弹幕
      */
     override fun loadData() {
-        RetrofitHelper.getBiliGoAPI()
-                .getHDVideoUrl(cid, 4, ConstantUtil.VIDEO_TYPE_MP4)
-                .compose(bindToLifecycle())
-                .map({ videoInfo -> Uri.parse(videoInfo.durl?.get(0)?.url) })
+        RetrofitHelper.getBiliAppAPI()
+                .getVideoDetails(aid)
+                //.getHDVideoUrl(cid, 4, ConstantUtil.VIDEO_TYPE_MP4)
+                //.compose(bindToLifecycle())
+//                .map({ videoInfo -> Uri.parse(videoInfo.durl?.get(0)?.url) })
+                .map({ videoInfo ->
+                    print(videoInfo)
+                    Uri.parse("http://flashmedia.eastday.com/newdate/news/2016-11/shznews1125-19.mp4")
+                })
                 .observeOn(AndroidSchedulers.mainThread())
                 .flatMap({ uri ->
                     playerView!!.setVideoURI(uri)
@@ -147,6 +153,7 @@ open class VideoPlayerActivity : RxBaseActivity(), DanmukuSwitchListener, VideoB
                         override fun prepared() {
                             mDanmakuView!!.start()
                         }
+
                         override fun updateTimer(danmakuTimer: DanmakuTimer) {}
                         override fun danmakuShown(danmaku: BaseDanmaku) {}
                         override fun drawingFinished() {}
@@ -298,10 +305,11 @@ open class VideoPlayerActivity : RxBaseActivity(), DanmukuSwitchListener, VideoB
     companion object {
 
 
-        fun launch(activity: Activity, cid: Int, title: String) {
+        fun launch(activity: Activity, cid: Int, title: String, av: Int) {
             val mIntent = Intent(activity, VideoPlayerActivity::class.java)
             mIntent.putExtra(ConstantUtil.EXTRA_CID, cid)
             mIntent.putExtra(ConstantUtil.EXTRA_TITLE, title)
+            mIntent.putExtra(ConstantUtil.EXTRA_AV, av)
             activity.startActivity(mIntent)
         }
     }

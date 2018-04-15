@@ -14,6 +14,7 @@ class BilibiliApp : Application(), ThemeUtils.switchColor {
         lateinit var instance: BilibiliApp
     }
 
+
     override fun onCreate() {
         super.onCreate()
         init()

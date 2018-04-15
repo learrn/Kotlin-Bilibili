@@ -49,10 +49,12 @@ class MediaController : FrameLayout {
     private var mVideoBackListener: VideoBackListener? = null
     private var mTvPlay: ImageView? = null
 
+    //弹幕开关监听器
     fun setDanmakuSwitchListener(danmukuSwitchListener: DanmukuSwitchListener) {
         this.mDanmukuSwitchListener = danmukuSwitchListener
     }
 
+    //视频返回监听器
     fun setVideoBackEvent(videoBackListener: VideoBackListener) {
         this.mVideoBackListener = videoBackListener
     }
@@ -204,7 +206,7 @@ class MediaController : FrameLayout {
             mPauseButton!!.requestFocus()
             mPauseButton!!.setOnClickListener(mPauseListener)
             mTvPlay!!.requestFocus()
-            mTvPlay!!.setOnClickListener { v13 ->
+            mTvPlay!!.setOnClickListener {
                 doPauseResume()
                 show(sDefaultTimeout)
             }

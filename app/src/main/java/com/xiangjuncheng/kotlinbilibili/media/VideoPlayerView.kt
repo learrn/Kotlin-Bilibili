@@ -70,7 +70,7 @@ class VideoPlayerView : SurfaceView, MediaPlayerListener {
             mOnPreparedListener!!.onPrepared(mMediaPlayer)
         }
         if (mMediaController != null) {
-            mMediaController!!.setEnabled(true)
+            mMediaController!!.isEnabled = true
         }
         videoWidth = mp.videoWidth
         videoHeight = mp.videoHeight
@@ -418,12 +418,11 @@ class VideoPlayerView : SurfaceView, MediaPlayerListener {
         if (mMediaPlayer != null && mMediaController != null) {
             mMediaController!!.setMediaPlayer(this)
             val anchorView = if (this.parent is View)
-                this
-                        .parent as View
+                this.parent as View
             else
                 this
             mMediaController!!.setAnchorView(anchorView)
-            mMediaController!!.setEnabled(isInPlaybackState)
+            mMediaController!!.isEnabled = isInPlaybackState
         }
     }
 

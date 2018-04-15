@@ -22,9 +22,10 @@
                 android:layout_height="@dimen/appbar_parallax_max_height"
                 android:fitsSystemWindows="true"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                android:minHeight="113dp"
                 app:contentScrim="?attr/colorPrimary"
                 app:expandedTitleTextAppearance="@style/CollapsingToolbarTitleStyle.About"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|enterAlwaysCollapsed">
 
                 <FrameLayout
                     android:layout_width="match_parent"

@@ -80,4 +80,10 @@ interface BiliAppService {
      */
     @GET("x/v2/region/show/child?build=3600")
     fun getRegionDetails(@Query("rid") rid: Int): Observable<RegionDetailsInfo>
+
+    /**
+     * 视频信息
+     */
+    @GET("view")
+    fun getView(@Query("id") id: Int,@Query("page") page: Int): Observable<String>
 }
